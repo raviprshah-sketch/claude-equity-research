@@ -1,30 +1,42 @@
 {
-  "_comment": "Top meaningful positions per fund from latest 13F (2026-Q1). pct = percent of 13F equity portfolio. pct_estimated=true means derived/approximate (exact per-name weight not disclosed in source snapshot); refresh_holdings.py overwrites with exact values when run against EDGAR. rank is by position size.",
+  "_comment": "Top ~10 meaningful positions per fund from latest 13F (2026-Q1). pct = percent of 13F equity portfolio. pct_estimated=true means approximate (exact per-name weight not disclosed in the source snapshot / name is a confirmed holding but ranked weight pending); refresh_holdings.py overwrites the whole list with exact EDGAR values and true ranks 1-12 on each weekly run. rank is by position size.",
   "as_of": "2026-Q1",
-  "source": "SEC 13F-HR aggregates (WhaleWisdom/HedgeFollow/GuruFocus cross-check, May 2026 filings)",
+  "source": "SEC 13F-HR aggregates (WhaleWisdom/HedgeFollow/GuruFocus/HoldingsChannel cross-check, May 2026 filings). RTW & Avoro top-5 weights are disclosed exact values; deeper ranks are confirmed holdings with estimated weights until the automated EDGAR refresh runs.",
   "holdings": {
     "rtw": [
-      {"ticker": "MDGL", "name": "Madrigal Pharmaceuticals", "rank": 1, "pct": 9.5, "pct_estimated": true},
-      {"ticker": "INSM", "name": "Insmed", "rank": 2, "pct": 8.5, "pct_estimated": true},
-      {"ticker": "PTCT", "name": "PTC Therapeutics", "rank": 3, "pct": 7.0, "pct_estimated": true},
-      {"ticker": "ARGX", "name": "argenx SE", "rank": 4, "pct": 6.0, "pct_estimated": true},
-      {"ticker": "PTGX", "name": "Protagonist Therapeutics", "rank": 5, "pct": 5.1, "pct_estimated": true},
+      {"ticker": "MDGL", "name": "Madrigal Pharmaceuticals", "rank": 1, "pct": 10.4, "pct_estimated": false},
+      {"ticker": "INSM", "name": "Insmed", "rank": 2, "pct": 7.9, "pct_estimated": false},
+      {"ticker": "PTGX", "name": "Protagonist Therapeutics", "rank": 3, "pct": 5.3, "pct_estimated": false},
+      {"ticker": "PTCT", "name": "PTC Therapeutics", "rank": 4, "pct": 5.3, "pct_estimated": false},
+      {"ticker": "ARGX", "name": "argenx SE", "rank": 5, "pct": 5.2, "pct_estimated": false},
       {"ticker": "ERAS", "name": "Erasca", "rank": 6, "pct": 2.5, "pct_estimated": true, "note": "Large Q1 add (~$189M)"},
-      {"ticker": "APLS", "name": "Apellis Pharmaceuticals", "rank": 7, "pct": 2.0, "pct_estimated": true, "note": "Q1 add (~$193M)"}
+      {"ticker": "APLS", "name": "Apellis Pharmaceuticals", "rank": 7, "pct": 2.4, "pct_estimated": true, "note": "Q1 add (~$193M)"},
+      {"ticker": "IRTC", "name": "iRhythm Technologies", "rank": 8, "pct": 2.1, "pct_estimated": true, "note": "New Q1 position (~$210M); >5% 13G filed"},
+      {"ticker": "IMVT", "name": "Immunovant", "rank": 9, "pct": 1.3, "pct_estimated": true}
     ],
     "avoro": [
       {"ticker": "UTHR", "name": "United Therapeutics", "rank": 1, "pct": 15.34, "pct_estimated": false},
       {"ticker": "ASND", "name": "Ascendis Pharma", "rank": 2, "pct": 11.39, "pct_estimated": false},
       {"ticker": "MDGL", "name": "Madrigal Pharmaceuticals", "rank": 3, "pct": 9.36, "pct_estimated": false},
       {"ticker": "KRYS", "name": "Krystal Biotech", "rank": 4, "pct": 7.34, "pct_estimated": false},
-      {"ticker": "ARGX", "name": "argenx SE", "rank": 5, "pct": 7.18, "pct_estimated": false}
+      {"ticker": "ARGX", "name": "argenx SE", "rank": 5, "pct": 7.18, "pct_estimated": false},
+      {"ticker": "CYTK", "name": "Cytokinetics", "rank": 6, "pct": 4.5, "pct_estimated": true},
+      {"ticker": "AKRO", "name": "Akero Therapeutics", "rank": 7, "pct": 4.0, "pct_estimated": true},
+      {"ticker": "KYMR", "name": "Kymera Therapeutics", "rank": 8, "pct": 3.5, "pct_estimated": true},
+      {"ticker": "MLTX", "name": "MoonLake Immunotherapeutics", "rank": 9, "pct": 3.2, "pct_estimated": true},
+      {"ticker": "APLS", "name": "Apellis Pharmaceuticals", "rank": 10, "pct": 3.0, "pct_estimated": true}
     ],
     "frazier": [
       {"ticker": "MIRM", "name": "Mirum Pharmaceuticals", "rank": 1, "pct": 14.0, "pct_estimated": true},
       {"ticker": "NAMS", "name": "NewAmsterdam Pharma", "rank": 2, "pct": 13.0, "pct_estimated": true},
       {"ticker": "ERAS", "name": "Erasca", "rank": 3, "pct": 10.5, "pct_estimated": true},
       {"ticker": "BBIO", "name": "BridgeBio Pharma", "rank": 4, "pct": 9.5, "pct_estimated": true},
-      {"ticker": "ARQT", "name": "Arcutis Biotherapeutics", "rank": 5, "pct": 8.0, "pct_estimated": true}
+      {"ticker": "ARQT", "name": "Arcutis Biotherapeutics", "rank": 5, "pct": 8.0, "pct_estimated": true},
+      {"ticker": "MBX", "name": "MBX Biosciences", "rank": 6, "pct": 6.0, "pct_estimated": true},
+      {"ticker": "BCRX", "name": "BioCryst Pharmaceuticals", "rank": 7, "pct": 5.0, "pct_estimated": true},
+      {"ticker": "ACRS", "name": "Aclaris Therapeutics", "rank": 8, "pct": 4.0, "pct_estimated": true},
+      {"ticker": "CYTK", "name": "Cytokinetics", "rank": 9, "pct": 3.5, "pct_estimated": true},
+      {"ticker": "IRON", "name": "Disc Medicine", "rank": 10, "pct": 3.0, "pct_estimated": true}
     ]
   }
 }
