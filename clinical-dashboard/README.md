@@ -27,7 +27,10 @@ It answers, at a glance:
 ## What it looks like
 
 - `output/dashboard.html` — the full interactive dashboard (self-contained, works
-  offline, light/dark theme aware).
+  offline, light/dark theme aware). A **Filter by manager** bar at the top scopes
+  every section — watch list, catalyst calendar, positions, conviction,
+  performance — to a single manager (RTW / Avoro / Frazier) or all three, with the
+  KPI tiles recomputing live. Deep-linkable via `#rtw`, `#avoro`, `#frazier`.
 - `output/monthly_email.html` — the monthly email brief (inline-styled, email-safe).
 
 Both are generated from the JSON in `data/` and committed so they render without

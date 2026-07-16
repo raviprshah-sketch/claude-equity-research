@@ -107,6 +107,14 @@ table{width:100%;border-collapse:collapse}
 .legend b{color:var(--ink2)}
 footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--grid);font-size:11px;color:var(--muted)}
 footer p{margin:5px 0}
+.filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0 4px}
+.flabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-right:4px}
+.fbtn{font-family:inherit;font-size:13px;font-weight:600;color:var(--ink2);background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;padding:6px 15px;cursor:pointer;transition:all .12s}
+.fbtn:hover{border-color:var(--blue);color:var(--ink)}
+.fbtn.active{background:var(--ink);color:var(--page);border-color:var(--ink)}
+.kctx{color:var(--blue);font-weight:600}
+.emptymsg{color:var(--muted);font-size:13px;font-style:italic;margin:4px 0 0}
 @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}
   .c-imp,.px{display:none}.desc{max-width:none}}
 </style>
@@ -125,65 +133,71 @@ footer p{margin:5px 0}
   </div>
 </header>
 
+<div class="filterbar" id="mgrfilter" role="group" aria-label="Filter by manager">
+  <span class="flabel">Filter by manager</span>
+  <button type="button" class="fbtn active" data-fund="all" aria-pressed="true">All managers</button><button type="button" class="fbtn" data-fund="rtw" aria-pressed="false">RTW Investments</button><button type="button" class="fbtn" data-fund="avoro" aria-pressed="false">Avoro Capital Advisors</button><button type="button" class="fbtn" data-fund="frazier" aria-pressed="false">Frazier Life Sciences Management</button>
+</div>
+
 <div class="kpis">
-  <div class="kpi"><div class="n">29</div><div class="l">Tracked positions</div></div>
-  <div class="kpi"><div class="n">33</div><div class="l">Upcoming catalysts</div></div>
-  <div class="kpi"><div class="n">8</div><div class="l">High-impact readouts on watch</div></div>
-  <div class="kpi"><div class="n">3</div><div class="l">Managers monitored</div></div>
+  <div class="kpi"><div class="n" id="kpi-pos">29</div><div class="l">Tracked positions <span class="kctx" id="kctx-pos"></span></div></div>
+  <div class="kpi"><div class="n" id="kpi-upc">33</div><div class="l">Upcoming catalysts</div></div>
+  <div class="kpi"><div class="n" id="kpi-watch">8</div><div class="l">High-impact readouts on watch</div></div>
+  <div class="kpi"><div class="n" id="kpi-mgr">3</div><div class="l">Managers shown</div></div>
 </div>
 
 <h2>Meaningful Readout Watch <span class="hint">near-term, stock-moving events</span></h2>
+<p class="emptymsg" id="empty-watch" hidden>No high-impact readouts on watch for this manager.</p>
 <div class="watch">
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="avoro rtw">
           <div class="wtop"><span class="tk">ARGX</span><span class="wcd">T−46 d</span></div>
           <div class="wasset">efgartigimod (Vyvgart)</div>
           <div class="wind">Myositis</div>
           <div class="wmeta"><span class="wtype">Phase 3 readout</span> · <span class="wwhen">Q3 2026</span></div>
           <div class="wfunds">RTW AVORO</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="rtw">
           <div class="wtop"><span class="tk">PTGX</span><span class="wcd">T−61 d</span></div>
           <div class="wasset">rusfertide</div>
           <div class="wind">Polycythemia vera</div>
           <div class="wmeta"><span class="wtype">PDUFA</span> · <span class="wwhen">Q3 2026</span></div>
           <div class="wfunds">RTW</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="avoro">
           <div class="wtop"><span class="tk">MLTX</span><span class="wcd">T−76 d</span></div>
           <div class="wasset">sonelokimab</div>
           <div class="wind">Hidradenitis suppurativa</div>
           <div class="wmeta"><span class="wtype">Regulatory (BLA filing)</span> · <span class="wwhen">End Q3 2026</span></div>
           <div class="wfunds">AVORO</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="avoro frazier">
           <div class="wtop"><span class="tk">CYTK</span><span class="wcd">T−121 d</span></div>
           <div class="wasset">aficamten (Myqorzo)</div>
           <div class="wind">Obstructive HCM (monotherapy)</div>
           <div class="wmeta"><span class="wtype">PDUFA</span> · <span class="wwhen">Nov 14, 2026</span></div>
           <div class="wfunds">AVORO FRAZIER</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="avoro rtw">
           <div class="wtop"><span class="tk">ARGX</span><span class="wcd">T−122 d</span></div>
           <div class="wasset">empasiprubart</div>
           <div class="wind">Multifocal motor neuropathy (MMN)</div>
           <div class="wmeta"><span class="wtype">Phase 3 readout</span> · <span class="wwhen">Q4 2026</span></div>
           <div class="wfunds">RTW AVORO</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="frazier">
           <div class="wtop"><span class="tk">MIRM</span><span class="wcd">T−122 d</span></div>
           <div class="wasset">volixibat</div>
           <div class="wind">Primary sclerosing cholangitis (PSC)</div>
           <div class="wmeta"><span class="wtype">Regulatory (NDA filing)</span> · <span class="wwhen">H2 2026</span></div>
           <div class="wfunds">FRAZIER</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="frazier">
           <div class="wtop"><span class="tk">NAMS</span><span class="wcd">T−122 d</span></div>
           <div class="wasset">obicetrapib</div>
           <div class="wind">LDL-C lowering / ASCVD</div>
           <div class="wmeta"><span class="wtype">Regulatory (EMA decision)</span> · <span class="wwhen">H2 2026</span></div>
           <div class="wfunds">FRAZIER</div>
         </div>
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="frazier">
           <div class="wtop"><span class="tk">IRON</span><span class="wcd">T−122 d</span></div>
           <div class="wasset">bitopertin</div>
           <div class="wind">Erythropoietic protoporphyria (EPP)</div>
@@ -195,7 +209,7 @@ footer p{margin:5px 0}
 
         <div class="bucket"><h3 class="bhead">Next 30 days <span class="bcount">1</span></h3>
         <table class="cattable"><tbody>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">Summer 2026</div><span class="cd">T−30 d</span></td>
       <td class="c-tk"><span class="tk">BBIO</span></td>
       <td class="c-what"><span class="ico">▶</span><span class="ctype">Trial start</span>
@@ -206,7 +220,7 @@ footer p{margin:5px 0}
     </tr></tbody></table></div>
         <div class="bucket"><h3 class="bhead">31–90 days <span class="bcount">5</span></h3>
         <table class="cattable"><tbody>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">Q3 2026</div><span class="cd">T−46 d</span></td>
       <td class="c-tk"><span class="tk">ARGX</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -215,7 +229,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="rtw">
       <td class="c-when"><div class="when-main">Q3 2026</div><span class="cd">T−61 d</span></td>
       <td class="c-tk"><span class="tk">PTGX</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
@@ -224,7 +238,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier rtw">
       <td class="c-when"><div class="when-main">2026</div><span class="cd">T−76 d</span></td>
       <td class="c-tk"><span class="tk">ERAS</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 / partnering</span>
@@ -233,7 +247,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro">
       <td class="c-when"><div class="when-main">End Q3 2026</div><span class="cd">T−76 d</span></td>
       <td class="c-tk"><span class="tk">MLTX</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Regulatory (BLA filing)</span>
@@ -242,7 +256,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">2026</div><span class="cd">T−77 d</span></td>
       <td class="c-tk"><span class="tk">MBX</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Trial start (Phase 3)</span>
@@ -253,7 +267,7 @@ footer p{margin:5px 0}
     </tr></tbody></table></div>
         <div class="bucket"><h3 class="bhead">91–180 days <span class="bcount">17</span></h3>
         <table class="cattable"><tbody>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="rtw">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−91 d</span></td>
       <td class="c-tk"><span class="tk">INSM</span></td>
       <td class="c-what"><span class="ico">▶</span><span class="ctype">Trial start / progression</span>
@@ -262,7 +276,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro frazier">
       <td class="c-when"><div class="when-main">Nov 14, 2026</div><span class="cd">T−121 d</span></td>
       <td class="c-tk"><span class="tk">CYTK</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
@@ -271,7 +285,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">ARGX</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -280,7 +294,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="frazier">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">MIRM</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (NDA filing)</span>
@@ -289,7 +303,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">MIRM</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -298,7 +312,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-low">
+    <tr class="catrow filterable imp-low" data-funds="frazier">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">MIRM</span></td>
       <td class="c-what"><span class="ico">▶</span><span class="ctype">Enrollment milestone</span>
@@ -307,7 +321,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--muted)">Low</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">MIRM</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
@@ -316,7 +330,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="frazier">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">NAMS</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (EMA decision)</span>
@@ -325,7 +339,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">KRYS</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Registrational readout</span>
@@ -334,7 +348,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-low">
+    <tr class="catrow filterable imp-low" data-funds="avoro">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">KRYS</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 1 readout</span>
@@ -343,7 +357,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--muted)">Low</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="frazier">
       <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">IRON</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -352,7 +366,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
       <td class="c-tk"><span class="tk">ACRS</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
@@ -361,7 +375,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−152 d</span></td>
       <td class="c-tk"><span class="tk">ARQT</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
@@ -370,7 +384,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-low">
+    <tr class="catrow filterable imp-low" data-funds="frazier">
       <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−152 d</span></td>
       <td class="c-tk"><span class="tk">ARQT</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
@@ -379,7 +393,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--muted)">Low</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="frazier rtw">
       <td class="c-when"><div class="when-main">2026</div><span class="cd">T−152 d</span></td>
       <td class="c-tk"><span class="tk">ERAS</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 1 readout</span>
@@ -388,7 +402,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="rtw">
       <td class="c-when"><div class="when-main">2026–2027</div><span class="cd">T−168 d</span></td>
       <td class="c-tk"><span class="tk">IMVT</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -397,7 +411,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro">
       <td class="c-when"><div class="when-main">Year-end 2026</div><span class="cd">T−168 d</span></td>
       <td class="c-tk"><span class="tk">KYMR</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2b readout</span>
@@ -408,7 +422,7 @@ footer p{margin:5px 0}
     </tr></tbody></table></div>
         <div class="bucket"><h3 class="bhead">6–12 months <span class="bcount">10</span></h3>
         <table class="cattable"><tbody>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="frazier">
       <td class="c-when"><div class="when-main">H1 2027 (est.)</div><span class="cd">T−258 d</span></td>
       <td class="c-tk"><span class="tk">BBIO</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (NDA review)</span>
@@ -417,7 +431,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro">
       <td class="c-when"><div class="when-main">2027 (est.)</div><span class="cd">T−258 d</span></td>
       <td class="c-tk"><span class="tk">UTHR</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (sNDA/PDUFA)</span>
@@ -426,7 +440,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">2027</div><span class="cd">T−349 d</span></td>
       <td class="c-tk"><span class="tk">MDGL</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (outcomes)</span>
@@ -435,7 +449,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro">
       <td class="c-when"><div class="when-main">2027+</div><span class="cd">T−349 d</span></td>
       <td class="c-tk"><span class="tk">AKRO</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (outcomes)</span>
@@ -444,7 +458,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
       <td class="c-when"><div class="when-main">2027</div><span class="cd">T−349 d</span></td>
       <td class="c-tk"><span class="tk">MLTX</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 3 (progression)</span>
@@ -453,7 +467,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">H2 2027</div><span class="cd">T−441 d</span></td>
       <td class="c-tk"><span class="tk">ARGX</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -462,7 +476,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="frazier">
       <td class="c-when"><div class="when-main">2027+</div><span class="cd">T−533 d</span></td>
       <td class="c-tk"><span class="tk">NAMS</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (CVOT)</span>
@@ -471,7 +485,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="rtw">
       <td class="c-when"><div class="when-main">2027+</div><span class="cd">T−533 d</span></td>
       <td class="c-tk"><span class="tk">PTCT</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 (partner-led)</span>
@@ -480,7 +494,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">BLA end-2027</div><span class="cd">T−533 d</span></td>
       <td class="c-tk"><span class="tk">BCRX</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 3 (progression)</span>
@@ -489,7 +503,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">2028</div><span class="cd">T−715 d</span></td>
       <td class="c-tk"><span class="tk">MDGL</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (outcomes)</span>
@@ -501,7 +515,7 @@ footer p{margin:5px 0}
 
 <h2>Positions by Manager <span class="hint">weights from latest 13F; * = estimated weight</span></h2>
 
-        <div class="fund">
+        <div class="fund fundblock" data-fund="rtw">
           <div class="fhead"><h3>RTW Investments, LP</h3><span class="fmeta">Roderick Wong · 97 positions · $10.0B book · 2026-Q1</span></div>
           <table class="ptable">
             <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
@@ -580,7 +594,7 @@ footer p{margin:5px 0}
             </tr></tbody>
           </table>
         </div>
-        <div class="fund">
+        <div class="fund fundblock" data-fund="avoro">
           <div class="fhead"><h3>Avoro Capital Advisors LLC</h3><span class="fmeta">Behzad Aghazadeh / Robert Adelman · 32 positions · $10.2B book · 2026-Q1</span></div>
           <table class="ptable">
             <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
@@ -667,7 +681,7 @@ footer p{margin:5px 0}
             </tr></tbody>
           </table>
         </div>
-        <div class="fund">
+        <div class="fund fundblock" data-fund="frazier">
           <div class="fhead"><h3>Frazier Life Sciences Management, L.P.</h3><span class="fmeta">Frazier Life Sciences · — positions · — book · 2026-Q1</span></div>
           <table class="ptable">
             <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
@@ -759,15 +773,15 @@ footer p{margin:5px 0}
 <table class="otable">
   <thead><tr><th>Ticker</th><th>Company</th><th>Funds</th><th>Held by</th><th>YTD</th><th>Next catalyst</th></tr></thead>
   <tbody>
-        <tr><td class="o-tk">MDGL</td><td>Madrigal Pharmaceuticals</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
+        <tr class="filterable" data-funds="avoro rtw"><td class="o-tk">MDGL</td><td>Madrigal Pharmaceuticals</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
             <td class="flat">—</td><td class="o-next">2027 — Rezdiffra (resmetirom)</td></tr>
-        <tr><td class="o-tk">ARGX</td><td>argenx SE</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
+        <tr class="filterable" data-funds="avoro rtw"><td class="o-tk">ARGX</td><td>argenx SE</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
             <td class="flat">—</td><td class="o-next">Q3 2026 — efgartigimod (Vyvgart)</td></tr>
-        <tr><td class="o-tk">ERAS</td><td>Erasca</td><td class="o-n">2</td><td><span class="fundchip">FRAZIER</span> <span class="fundchip">RTW</span></td>
+        <tr class="filterable" data-funds="frazier rtw"><td class="o-tk">ERAS</td><td>Erasca</td><td class="o-n">2</td><td><span class="fundchip">FRAZIER</span> <span class="fundchip">RTW</span></td>
             <td class="flat">—</td><td class="o-next">2026 — naporafenib</td></tr>
-        <tr><td class="o-tk">APLS</td><td>Apellis Pharmaceuticals</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
+        <tr class="filterable" data-funds="avoro rtw"><td class="o-tk">APLS</td><td>Apellis Pharmaceuticals</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
             <td class="flat">—</td><td class="o-next">—</td></tr>
-        <tr><td class="o-tk">CYTK</td><td>Cytokinetics</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">FRAZIER</span></td>
+        <tr class="filterable" data-funds="avoro frazier"><td class="o-tk">CYTK</td><td>Cytokinetics</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">FRAZIER</span></td>
             <td class="flat">—</td><td class="o-next">Nov 14, 2026 — aficamten (Myqorzo)</td></tr></tbody>
 </table>
 
@@ -780,7 +794,7 @@ footer p{margin:5px 0}
 
 <h2>Recent Readouts <span class="hint">reported catalysts to review</span></h2>
 <table class="cattable"><tbody>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">Jun 29, 2026</div></td>
       <td class="c-tk"><span class="tk">ARQT</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
@@ -789,7 +803,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="rtw">
       <td class="c-when"><div class="when-main">Q2 2026</div></td>
       <td class="c-tk"><span class="tk">INSM</span></td>
       <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
@@ -798,7 +812,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro frazier">
       <td class="c-when"><div class="when-main">May 2026</div></td>
       <td class="c-tk"><span class="tk">CYTK</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -807,7 +821,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="rtw">
       <td class="c-when"><div class="when-main">Mar-Apr 2026</div></td>
       <td class="c-tk"><span class="tk">INSM</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -816,7 +830,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro">
       <td class="c-when"><div class="when-main">Mar 30, 2026</div></td>
       <td class="c-tk"><span class="tk">UTHR</span></td>
       <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
@@ -825,7 +839,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro">
       <td class="c-when"><div class="when-main">Feb 28, 2026</div></td>
       <td class="c-tk"><span class="tk">ASND</span></td>
       <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
@@ -837,7 +851,7 @@ footer p{margin:5px 0}
 
 <h2>Recurring Watch-items <span class="hint">quarterly commercial trajectories</span></h2>
 <table class="cattable"><tbody>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">BBIO</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -846,7 +860,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="rtw">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">INSM</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -855,7 +869,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-high">
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">MDGL</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -864,7 +878,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">ASND</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -873,7 +887,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">KRYS</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -882,7 +896,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="rtw">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">PTCT</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial / launch</span>
@@ -891,7 +905,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro rtw">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">APLS</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -900,7 +914,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="avoro frazier">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">CYTK</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -909,7 +923,7 @@ footer p{margin:5px 0}
       <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
       <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
     </tr>
-    <tr class="catrow imp-medium">
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
       <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
       <td class="c-tk"><span class="tk">BCRX</span></td>
       <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
@@ -926,5 +940,62 @@ footer p{margin:5px 0}
   Regenerate with <code>python scripts/build_dashboard.py</code>.</p>
 </footer>
 </div>
+
+<script>
+(function(){
+  var COUNTS = {"all": {"pos": 29, "upc": 33, "watch": 8, "name": "All managers"}, "rtw": {"pos": 9, "upc": 11, "watch": 3, "name": "RTW Investments, LP"}, "avoro": {"pos": 10, "upc": 13, "watch": 4, "name": "Avoro Capital Advisors LLC"}, "frazier": {"pos": 10, "upc": 17, "watch": 4, "name": "Frazier Life Sciences Management, L.P."}};
+  var bar = document.getElementById('mgrfilter');
+  if(!bar) return;
+  var btns = Array.prototype.slice.call(bar.querySelectorAll('.fbtn'));
+
+  function apply(fund){
+    // row/card level filter
+    document.querySelectorAll('.filterable').forEach(function(el){
+      var f = el.getAttribute('data-funds') || '';
+      var show = (fund === 'all') || f.split(' ').indexOf(fund) !== -1;
+      el.hidden = !show;
+    });
+    // whole manager blocks (Positions by Manager)
+    document.querySelectorAll('.fundblock').forEach(function(el){
+      el.hidden = !(fund === 'all' || el.getAttribute('data-fund') === fund);
+    });
+    // collapse empty calendar buckets
+    document.querySelectorAll('.bucket').forEach(function(b){
+      var any = Array.prototype.slice.call(b.querySelectorAll('tr.filterable'))
+                 .some(function(r){ return !r.hidden; });
+      b.hidden = !any;
+    });
+    // empty-state message for the watch grid
+    var watchAny = Array.prototype.slice.call(document.querySelectorAll('.wcard'))
+                    .some(function(c){ return !c.hidden; });
+    var em = document.getElementById('empty-watch');
+    if(em) em.hidden = watchAny;
+
+    // KPIs
+    var c = COUNTS[fund] || COUNTS.all;
+    setText('kpi-pos', c.pos);
+    setText('kpi-upc', c.upc);
+    setText('kpi-watch', c.watch);
+    setText('kpi-mgr', fund === 'all' ? Object.keys(COUNTS).length - 1 : 1);
+    setText('kctx-pos', fund === 'all' ? '' : '· ' + c.name.split(',')[0]);
+
+    btns.forEach(function(b){
+      var on = b.getAttribute('data-fund') === fund;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { history.replaceState(null, '', fund === 'all' ? location.pathname : '#' + fund); } catch(e){}
+  }
+  function setText(id, v){ var e = document.getElementById(id); if(e) e.textContent = v; }
+
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-fund')); });
+  });
+
+  // honor a deep link like #rtw on load
+  var initial = (location.hash || '').replace('#','');
+  apply(COUNTS[initial] ? initial : 'all');
+})();
+</script>
 </body>
 </html>

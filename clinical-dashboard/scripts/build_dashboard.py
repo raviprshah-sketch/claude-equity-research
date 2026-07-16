@@ -10,6 +10,7 @@ Sections:
 Writes output/dashboard.html. No external assets, theme-aware (light/dark).
 """
 import html
+import json
 from datetime import date
 
 from lib import load_json, days_until, parse_iso, OUTPUT
@@ -107,22 +108,24 @@ def catalyst_row(c, holdings, funds_by_id, prices):
     last = px.get("last")
     pxbadge = ('<span class="px">$%.2f <em class="%s">%s</em></span>' % (
         last, perf_class(px.get("ret_1m")), fmt_pct(px.get("ret_1m")))) if last else ""
+    fund_ids = " ".join(sorted(fid for fid, _ in holders))
     return """
-    <tr class="catrow imp-%s">
+    <tr class="catrow filterable imp-%s" data-funds="%s">
       <td class="c-when"><div class="when-main">%s</div>%s</td>
       <td class="c-tk"><span class="tk">%s</span>%s</td>
       <td class="c-what"><span class="ico">%s</span><span class="ctype">%s</span>
           <div class="asset">%s <span class="ind">%s</span></div>
           <div class="desc">%s</div></td>
       <td class="c-imp"><span class="badge" style="--bc:%s">%s</span></td>
-      <td class="c-funds">%s%s</td>
+      <td class="c-funds">%s</td>
     </tr>""" % (
-        esc(c["importance"]), esc(c["display"]), countdown,
+        esc(c["importance"]), esc(fund_ids),
+        esc(c["display"]), countdown,
         esc(c["ticker"]), pxbadge,
         icon, esc(c["type"]), esc(c["asset"]), esc(c["indication"]),
         esc(c["description"]),
         imp["color"], imp["label"],
-        chips, "",
+        chips,
     )
 
 
@@ -156,14 +159,16 @@ def build():
         dleft = days_until(c["sort_date"])
         holders = holders_of(c["ticker"], holdings)
         chips = " ".join(esc(fid.upper()) for fid, _ in holders)
+        fund_ids = " ".join(sorted(fid for fid, _ in holders))
         watch_cards += """
-        <div class="wcard">
+        <div class="wcard filterable" data-funds="%s">
           <div class="wtop"><span class="tk">%s</span><span class="wcd">%s</span></div>
           <div class="wasset">%s</div>
           <div class="wind">%s</div>
           <div class="wmeta"><span class="wtype">%s</span> · <span class="wwhen">%s</span></div>
           <div class="wfunds">%s</div>
         </div>""" % (
+            esc(fund_ids),
             esc(c["ticker"]),
             ("T−%d d" % dleft) if dleft is not None else esc(c["display"]),
             esc(c["asset"]), esc(c["indication"]), esc(c["type"]), esc(c["display"]),
@@ -221,14 +226,14 @@ def build():
         pv = f.get("portfolio_value_usd")
         pv_str = ("$%.1fB" % (pv / 1e9)) if pv else "—"
         fund_sections += """
-        <div class="fund">
+        <div class="fund fundblock" data-fund="%s">
           <div class="fhead"><h3>%s</h3><span class="fmeta">%s · %s positions · %s book · %s</span></div>
           <table class="ptable">
             <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
             <tbody>%s</tbody>
           </table>
         </div>""" % (
-            esc(f["name"]), esc(f.get("manager", "")), esc(f.get("positions_count") or "—"),
+            esc(f["id"]), esc(f["name"]), esc(f.get("manager", "")), esc(f.get("positions_count") or "—"),
             pv_str, esc(f.get("filing_quarter", "")), rows)
 
     # ---- Conviction overlap ----
@@ -247,8 +252,9 @@ def build():
         next_html = ("%s — %s" % (esc(nxt[0]["display"]), esc(nxt[0]["asset"]))) if nxt else "—"
         chips = " ".join('<span class="fundchip">%s</span>' % esc(x.upper()) for x in sorted(fs))
         overlap_rows += """
-        <tr><td class="o-tk">%s</td><td>%s</td><td class="o-n">%d</td><td>%s</td>
+        <tr class="filterable" data-funds="%s"><td class="o-tk">%s</td><td>%s</td><td class="o-n">%d</td><td>%s</td>
             <td class="%s">%s</td><td class="o-next">%s</td></tr>""" % (
+            esc(" ".join(sorted(fs))),
             esc(t), esc(ticker_name[t]), len(fs), chips,
             perf_class(px.get("ret_ytd")), fmt_pct(px.get("ret_ytd")), next_html)
 
@@ -261,12 +267,36 @@ def build():
             continue
         def cell(k):
             return "<td class='%s'>%s</td>" % (perf_class(px.get(k)), fmt_pct(px.get(k)))
-        perf_rows += "<tr><td class='pf-tk'>%s</td><td>%s</td><td class='pf-last'>$%.2f</td>%s%s%s%s</tr>" % (
+        perf_rows += "<tr class='filterable' data-funds='%s'><td class='pf-tk'>%s</td><td>%s</td><td class='pf-last'>$%.2f</td>%s%s%s%s</tr>" % (
+            esc(" ".join(sorted(ticker_funds.get(t, [])))),
             esc(t), esc(ticker_name[t]), px["last"],
             cell("ret_1m"), cell("ret_3m"), cell("ret_ytd"), cell("ret_12m"))
     perf_note = "" if perf_rows else "<p class='empty'>Price data populates after the first data-refresh run (scripts/refresh_prices.py).</p>"
 
     price_asof = prices.get("as_of", "not yet run")
+
+    # per-manager counts for the live filter (positions, upcoming catalysts, watch)
+    def held_by(fid):
+        return {h["ticker"] for h in holdings["holdings"].get(fid, [])}
+    counts = {"all": {
+        "pos": sum(len(v) for v in holdings["holdings"].values()),
+        "upc": len(upcoming), "watch": len(watch),
+        "name": "All managers"}}
+    for f in funds["funds"]:
+        tk = held_by(f["id"])
+        counts[f["id"]] = {
+            "pos": len(holdings["holdings"].get(f["id"], [])),
+            "upc": sum(1 for c in upcoming if c["ticker"] in tk),
+            "watch": sum(1 for c in watch if c["ticker"] in tk),
+            "name": f["name"],
+        }
+    # filter bar buttons
+    filter_btns = ('<button type="button" class="fbtn active" data-fund="all" '
+                   'aria-pressed="true">All managers</button>')
+    for f in funds["funds"]:
+        filter_btns += ('<button type="button" class="fbtn" data-fund="%s" aria-pressed="false">'
+                        '%s</button>') % (esc(f["id"]), esc(f["name"].split(",")[0].split(" LLC")[0]))
+
     subs = {
         "generated": catalysts.get("generated", str(date.today())),
         "holdings_asof": holdings.get("as_of", ""),
@@ -275,6 +305,8 @@ def build():
         "n_upcoming": str(len(upcoming)),
         "n_watch": str(len(watch)),
         "n_positions": str(sum(len(v) for v in holdings["holdings"].values())),
+        "filter_btns": filter_btns,
+        "counts_json": json.dumps(counts),
         "watch_cards": watch_cards,
         "calendar": calendar,
         "recent_rows": recent_rows,
@@ -404,6 +436,14 @@ table{width:100%;border-collapse:collapse}
 .legend b{color:var(--ink2)}
 footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--grid);font-size:11px;color:var(--muted)}
 footer p{margin:5px 0}
+.filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0 4px}
+.flabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-right:4px}
+.fbtn{font-family:inherit;font-size:13px;font-weight:600;color:var(--ink2);background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;padding:6px 15px;cursor:pointer;transition:all .12s}
+.fbtn:hover{border-color:var(--blue);color:var(--ink)}
+.fbtn.active{background:var(--ink);color:var(--page);border-color:var(--ink)}
+.kctx{color:var(--blue);font-weight:600}
+.emptymsg{color:var(--muted);font-size:13px;font-style:italic;margin:4px 0 0}
 @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}
   .c-imp,.px{display:none}.desc{max-width:none}}
 </style>
@@ -422,14 +462,20 @@ footer p{margin:5px 0}
   </div>
 </header>
 
+<div class="filterbar" id="mgrfilter" role="group" aria-label="Filter by manager">
+  <span class="flabel">Filter by manager</span>
+  @@filter_btns@@
+</div>
+
 <div class="kpis">
-  <div class="kpi"><div class="n">@@n_positions@@</div><div class="l">Tracked positions</div></div>
-  <div class="kpi"><div class="n">@@n_upcoming@@</div><div class="l">Upcoming catalysts</div></div>
-  <div class="kpi"><div class="n">@@n_watch@@</div><div class="l">High-impact readouts on watch</div></div>
-  <div class="kpi"><div class="n">3</div><div class="l">Managers monitored</div></div>
+  <div class="kpi"><div class="n" id="kpi-pos">@@n_positions@@</div><div class="l">Tracked positions <span class="kctx" id="kctx-pos"></span></div></div>
+  <div class="kpi"><div class="n" id="kpi-upc">@@n_upcoming@@</div><div class="l">Upcoming catalysts</div></div>
+  <div class="kpi"><div class="n" id="kpi-watch">@@n_watch@@</div><div class="l">High-impact readouts on watch</div></div>
+  <div class="kpi"><div class="n" id="kpi-mgr">3</div><div class="l">Managers shown</div></div>
 </div>
 
 <h2>Meaningful Readout Watch <span class="hint">near-term, stock-moving events</span></h2>
+<p class="emptymsg" id="empty-watch" hidden>No high-impact readouts on watch for this manager.</p>
 <div class="watch">@@watch_cards@@</div>
 
 <h2>Catalyst Calendar <span class="hint">upcoming, by time to event</span></h2>
@@ -464,6 +510,63 @@ footer p{margin:5px 0}
   Regenerate with <code>python scripts/build_dashboard.py</code>.</p>
 </footer>
 </div>
+
+<script>
+(function(){
+  var COUNTS = @@counts_json@@;
+  var bar = document.getElementById('mgrfilter');
+  if(!bar) return;
+  var btns = Array.prototype.slice.call(bar.querySelectorAll('.fbtn'));
+
+  function apply(fund){
+    // row/card level filter
+    document.querySelectorAll('.filterable').forEach(function(el){
+      var f = el.getAttribute('data-funds') || '';
+      var show = (fund === 'all') || f.split(' ').indexOf(fund) !== -1;
+      el.hidden = !show;
+    });
+    // whole manager blocks (Positions by Manager)
+    document.querySelectorAll('.fundblock').forEach(function(el){
+      el.hidden = !(fund === 'all' || el.getAttribute('data-fund') === fund);
+    });
+    // collapse empty calendar buckets
+    document.querySelectorAll('.bucket').forEach(function(b){
+      var any = Array.prototype.slice.call(b.querySelectorAll('tr.filterable'))
+                 .some(function(r){ return !r.hidden; });
+      b.hidden = !any;
+    });
+    // empty-state message for the watch grid
+    var watchAny = Array.prototype.slice.call(document.querySelectorAll('.wcard'))
+                    .some(function(c){ return !c.hidden; });
+    var em = document.getElementById('empty-watch');
+    if(em) em.hidden = watchAny;
+
+    // KPIs
+    var c = COUNTS[fund] || COUNTS.all;
+    setText('kpi-pos', c.pos);
+    setText('kpi-upc', c.upc);
+    setText('kpi-watch', c.watch);
+    setText('kpi-mgr', fund === 'all' ? Object.keys(COUNTS).length - 1 : 1);
+    setText('kctx-pos', fund === 'all' ? '' : '· ' + c.name.split(',')[0]);
+
+    btns.forEach(function(b){
+      var on = b.getAttribute('data-fund') === fund;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { history.replaceState(null, '', fund === 'all' ? location.pathname : '#' + fund); } catch(e){}
+  }
+  function setText(id, v){ var e = document.getElementById(id); if(e) e.textContent = v; }
+
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-fund')); });
+  });
+
+  // honor a deep link like #rtw on load
+  var initial = (location.hash || '').replace('#','');
+  apply(COUNTS[initial] ? initial : 'all');
+})();
+</script>
 </body>
 </html>"""
 
