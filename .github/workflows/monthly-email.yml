@@ -1,0 +1,53 @@
+name: Monthly catalyst email
+
+# Refresh data, build the monthly brief, and email it. Runs on the 1st of each
+# month; also runnable on demand from the Actions tab.
+on:
+  schedule:
+    - cron: "0 13 1 * *"   # 1st of month, 13:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: clinical-dashboard
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refresh data (best-effort) and build brief
+        env:
+          DASHBOARD_UA: "claude-equity-research clinical-dashboard (contact: ${{ secrets.CONTACT_EMAIL }})"
+        run: |
+          python scripts/refresh_all.py
+          python scripts/build_email.py
+
+      - name: Send email
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python scripts/send_email.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "dashboard-bot"
+          git config user.email "dashboard-bot@users.noreply.github.com"
+          git add data/*.json output/*.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(dashboard): monthly refresh + brief [skip ci]"
+            git push
+          fi

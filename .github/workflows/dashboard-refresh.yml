@@ -1,0 +1,48 @@
+name: Dashboard data refresh
+
+# Weekly pull of 13F holdings, prices and trial status, then rebuild the
+# dashboard and commit the updated data + output back to the branch.
+on:
+  schedule:
+    - cron: "0 12 * * 1"   # Mondays 12:00 UTC
+  workflow_dispatch: {}      # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: clinical-dashboard
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refresh data and rebuild dashboard
+        env:
+          # SEC EDGAR requires a descriptive UA with contact info.
+          DASHBOARD_UA: "claude-equity-research clinical-dashboard (contact: ${{ secrets.CONTACT_EMAIL }})"
+        run: python scripts/refresh_all.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "dashboard-bot"
+          git config user.email "dashboard-bot@users.noreply.github.com"
+          git add data/*.json output/*.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(dashboard): weekly data refresh [skip ci]"
+            git push
+          fi
+
+      - name: Upload dashboard artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-html
+          path: clinical-dashboard/output/dashboard.html

@@ -1,0 +1,5 @@
+{
+  "_comment": "Populated by scripts/refresh_prices.py (Stooq EOD) in GitHub Actions. Empty until first refresh.",
+  "as_of": null,
+  "prices": {}
+}

@@ -1,0 +1,19 @@
+{
+  "_comment": "Ticker reference. name_aliases are matched (case-insensitive substring) against 13F information-table issuer names so refresh_holdings.py can attach tickers to CUSIPs. sponsor is the ClinicalTrials.gov sponsor query used by refresh_trials.py.",
+  "companies": {
+    "MDGL": {"name": "Madrigal Pharmaceuticals", "name_aliases": ["MADRIGAL PHARM"], "sponsor": "Madrigal Pharmaceuticals"},
+    "INSM": {"name": "Insmed", "name_aliases": ["INSMED"], "sponsor": "Insmed"},
+    "PTCT": {"name": "PTC Therapeutics", "name_aliases": ["PTC THERAP"], "sponsor": "PTC Therapeutics"},
+    "ARGX": {"name": "argenx SE", "name_aliases": ["ARGENX"], "sponsor": "argenx"},
+    "PTGX": {"name": "Protagonist Therapeutics", "name_aliases": ["PROTAGONIST"], "sponsor": "Protagonist Therapeutics"},
+    "ERAS": {"name": "Erasca", "name_aliases": ["ERASCA"], "sponsor": "Erasca"},
+    "APLS": {"name": "Apellis Pharmaceuticals", "name_aliases": ["APELLIS"], "sponsor": "Apellis Pharmaceuticals"},
+    "UTHR": {"name": "United Therapeutics", "name_aliases": ["UNITED THERAP"], "sponsor": "United Therapeutics"},
+    "ASND": {"name": "Ascendis Pharma", "name_aliases": ["ASCENDIS"], "sponsor": "Ascendis Pharma"},
+    "KRYS": {"name": "Krystal Biotech", "name_aliases": ["KRYSTAL BIOTECH"], "sponsor": "Krystal Biotech"},
+    "MIRM": {"name": "Mirum Pharmaceuticals", "name_aliases": ["MIRUM"], "sponsor": "Mirum Pharmaceuticals"},
+    "NAMS": {"name": "NewAmsterdam Pharma", "name_aliases": ["NEWAMSTERDAM", "NEW AMSTERDAM"], "sponsor": "NewAmsterdam Pharma"},
+    "BBIO": {"name": "BridgeBio Pharma", "name_aliases": ["BRIDGEBIO"], "sponsor": "BridgeBio"},
+    "ARQT": {"name": "Arcutis Biotherapeutics", "name_aliases": ["ARCUTIS"], "sponsor": "Arcutis Biotherapeutics"}
+  }
+}
