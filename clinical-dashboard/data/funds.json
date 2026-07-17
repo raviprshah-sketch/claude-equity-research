@@ -1,0 +1,39 @@
+{
+  "_comment": "Managers to track. cik is the SEC EDGAR filer CIK used to pull 13F-HR filings. Refreshed automatically by scripts/refresh_holdings.py when run in an unrestricted network (e.g. GitHub Actions).",
+  "as_of": "2026-Q1",
+  "funds": [
+    {
+      "id": "rtw",
+      "name": "RTW Investments, LP",
+      "cik": "0001493215",
+      "manager": "Roderick Wong",
+      "style": "Crossover / healthcare, deep clinical conviction",
+      "portfolio_value_usd": 10036410796,
+      "positions_count": 97,
+      "filing_quarter": "2026-Q1",
+      "filing_date": "2026-05-15"
+    },
+    {
+      "id": "avoro",
+      "name": "Avoro Capital Advisors LLC",
+      "cik": "0001633313",
+      "manager": "Behzad Aghazadeh / Robert Adelman",
+      "style": "Concentrated biotech long, commercial + late clinical",
+      "portfolio_value_usd": 10160000000,
+      "positions_count": 32,
+      "filing_quarter": "2026-Q1",
+      "filing_date": "2026-05-15"
+    },
+    {
+      "id": "frazier",
+      "name": "Frazier Life Sciences Management, L.P.",
+      "cik": "0001892134",
+      "manager": "Frazier Life Sciences",
+      "style": "Life sciences specialist, mid/small-cap clinical",
+      "portfolio_value_usd": null,
+      "positions_count": null,
+      "filing_quarter": "2026-Q1",
+      "filing_date": "2026-05-15"
+    }
+  ]
+}

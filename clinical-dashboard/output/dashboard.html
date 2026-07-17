@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinical Catalyst Dashboard</title>
+<style>
+:root{
+  color-scheme: light dark;
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+  --blue:#2a78d6; --violet:#4a3aa7;
+  --good:#006300; --neg:#d03b3b; --warning:#c98500; --critical:#d03b3b; --serious:#eb6834;
+  --wt:#2a78d6;
+}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])){
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+  --blue:#3987e5; --violet:#9085e9; --good:#0ca30c; --neg:#e66767; --warning:#eda100;
+  --critical:#e34948; --serious:#eb6834; --wt:#3987e5;
+}}
+:root[data-theme="dark"]{
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+  --blue:#3987e5; --violet:#9085e9; --good:#0ca30c; --neg:#e66767; --warning:#eda100;
+  --critical:#e34948; --serious:#eb6834; --wt:#3987e5;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+header.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;
+  border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:8px}
+h1{font-size:26px;margin:0;letter-spacing:-0.02em}
+.sub{color:var(--ink2);font-size:13px;margin-top:4px}
+.asof{font-size:12px;color:var(--muted);text-align:right}
+.asof b{color:var(--ink2)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 30px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.kpi .n{font-size:30px;font-weight:650;letter-spacing:-0.02em}
+.kpi .l{font-size:12px;color:var(--ink2);margin-top:2px}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink2);
+  margin:38px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--grid)}
+h2 .hint{text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted);font-size:12px;margin-left:8px}
+.watch{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
+.wcard{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--critical);
+  border-radius:10px;padding:13px 14px}
+.wtop{display:flex;justify-content:space-between;align-items:baseline}
+.wtop .tk{font-weight:700;font-size:16px}
+.wcd{font-size:12px;font-weight:600;color:var(--critical);font-variant-numeric:tabular-nums}
+.wasset{font-size:13px;font-weight:600;margin-top:6px}
+.wind{font-size:12px;color:var(--ink2)}
+.wmeta{font-size:11px;color:var(--muted);margin-top:6px}
+.wfunds{font-size:11px;color:var(--blue);font-weight:600;margin-top:5px;letter-spacing:0.03em}
+.bucket{margin-bottom:20px}
+.bhead{font-size:13px;font-weight:650;margin:0 0 6px;color:var(--ink)}
+.bcount{display:inline-block;background:var(--grid);color:var(--ink2);border-radius:10px;
+  font-size:11px;padding:0 7px;margin-left:6px;vertical-align:middle}
+table{width:100%;border-collapse:collapse}
+.cattable td{border-top:1px solid var(--grid);padding:10px 8px;vertical-align:top;font-size:13px}
+.catrow .c-when{width:98px;color:var(--ink2)}
+.when-main{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.cd{display:inline-block;font-size:11px;color:var(--serious);font-weight:600;margin-top:3px}
+.cd.overdue{color:var(--critical)}
+.c-tk{width:96px}
+.c-tk .tk{font-weight:700}
+.px{display:block;font-size:11px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.px em{font-style:normal}
+.ico{color:var(--muted);margin-right:6px}
+.ctype{font-size:11px;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink2);font-weight:600}
+.asset{font-weight:600;margin-top:3px}
+.asset .ind{font-weight:400;color:var(--ink2)}
+.desc{color:var(--ink2);font-size:12px;margin-top:3px;max-width:52ch}
+.c-imp{width:78px}
+.badge{display:inline-block;font-size:11px;font-weight:600;color:var(--bc);
+  border:1px solid var(--bc);border-radius:20px;padding:1px 9px}
+.c-funds{width:110px}
+.fundchip{display:inline-block;background:var(--blue);color:#fff;border-radius:5px;
+  font-size:10px;font-weight:700;padding:2px 6px;margin:0 3px 3px 0;letter-spacing:0.03em}
+.pos{color:var(--good);font-weight:600;font-variant-numeric:tabular-nums}
+.neg{color:var(--neg);font-weight:600;font-variant-numeric:tabular-nums}
+.flat{color:var(--muted);font-variant-numeric:tabular-nums}
+.fund{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:18px}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.fhead h3{margin:0;font-size:16px}
+.fmeta{font-size:12px;color:var(--muted)}
+.ptable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.04em;
+  color:var(--muted);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--grid)}
+.ptable td{padding:8px;border-top:1px solid var(--grid);font-size:13px}
+.p-tk{font-weight:700;width:64px}
+.p-wt{width:150px}
+.wtwrap{position:relative;display:flex;align-items:center;gap:8px}
+.wtbar{height:8px;background:var(--wt);border-radius:4px;min-width:2px;display:inline-block}
+.wtn{font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.p-next .nc{font-weight:600;font-variant-numeric:tabular-nums}
+.p-next .nc em{font-style:normal;font-weight:400;color:var(--ink2);font-size:11px;display:block}
+.p-next .none{color:var(--muted)}
+.otable td{padding:9px 8px;border-top:1px solid var(--grid);font-size:13px}
+.otable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);
+  font-weight:600;padding:6px 8px;border-bottom:1px solid var(--grid)}
+.o-tk{font-weight:700}
+.o-n{text-align:center;font-weight:700;color:var(--violet)}
+.pf-tk{font-weight:700}
+.pf-last{font-variant-numeric:tabular-nums}
+.empty{color:var(--muted);font-size:13px;font-style:italic}
+.legend{font-size:12px;color:var(--muted);margin-top:8px}
+.legend b{color:var(--ink2)}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--grid);font-size:11px;color:var(--muted)}
+footer p{margin:5px 0}
+.filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:20px 0 4px}
+.flabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-right:4px}
+.fbtn{font-family:inherit;font-size:13px;font-weight:600;color:var(--ink2);background:var(--surface);
+  border:1px solid var(--border);border-radius:20px;padding:6px 15px;cursor:pointer;transition:all .12s}
+.fbtn:hover{border-color:var(--blue);color:var(--ink)}
+.fbtn.active{background:var(--ink);color:var(--page);border-color:var(--ink)}
+.kctx{color:var(--blue);font-weight:600}
+.emptymsg{color:var(--muted);font-size:13px;font-style:italic;margin:4px 0 0}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}
+  .c-imp,.px{display:none}.desc{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Clinical Catalyst &amp; Position Dashboard</h1>
+    <div class="sub">Meaningful biotech positions across RTW Investments, Avoro Capital &amp; Frazier Life Sciences</div>
+  </div>
+  <div class="asof">
+    Catalysts curated <b>2026-07-16</b><br>
+    Holdings (13F) <b>2026-Q1</b> · Prices <b></b><br>
+    Trials <b>not yet run</b>
+  </div>
+</header>
+
+<div class="filterbar" id="mgrfilter" role="group" aria-label="Filter by manager">
+  <span class="flabel">Filter by manager</span>
+  <button type="button" class="fbtn active" data-fund="all" aria-pressed="true">All managers</button><button type="button" class="fbtn" data-fund="rtw" aria-pressed="false">RTW Investments</button><button type="button" class="fbtn" data-fund="avoro" aria-pressed="false">Avoro Capital Advisors</button><button type="button" class="fbtn" data-fund="frazier" aria-pressed="false">Frazier Life Sciences Management</button>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="n" id="kpi-pos">29</div><div class="l">Tracked positions <span class="kctx" id="kctx-pos"></span></div></div>
+  <div class="kpi"><div class="n" id="kpi-upc">33</div><div class="l">Upcoming catalysts</div></div>
+  <div class="kpi"><div class="n" id="kpi-watch">8</div><div class="l">High-impact readouts on watch</div></div>
+  <div class="kpi"><div class="n" id="kpi-mgr">3</div><div class="l">Managers shown</div></div>
+</div>
+
+<h2>Meaningful Readout Watch <span class="hint">near-term, stock-moving events</span></h2>
+<p class="emptymsg" id="empty-watch" hidden>No high-impact readouts on watch for this manager.</p>
+<div class="watch">
+        <div class="wcard filterable" data-funds="avoro rtw">
+          <div class="wtop"><span class="tk">ARGX</span><span class="wcd">T−46 d</span></div>
+          <div class="wasset">efgartigimod (Vyvgart)</div>
+          <div class="wind">Myositis</div>
+          <div class="wmeta"><span class="wtype">Phase 3 readout</span> · <span class="wwhen">Q3 2026</span></div>
+          <div class="wfunds">RTW AVORO</div>
+        </div>
+        <div class="wcard filterable" data-funds="rtw">
+          <div class="wtop"><span class="tk">PTGX</span><span class="wcd">T−61 d</span></div>
+          <div class="wasset">rusfertide</div>
+          <div class="wind">Polycythemia vera</div>
+          <div class="wmeta"><span class="wtype">PDUFA</span> · <span class="wwhen">Q3 2026</span></div>
+          <div class="wfunds">RTW</div>
+        </div>
+        <div class="wcard filterable" data-funds="avoro">
+          <div class="wtop"><span class="tk">MLTX</span><span class="wcd">T−76 d</span></div>
+          <div class="wasset">sonelokimab</div>
+          <div class="wind">Hidradenitis suppurativa</div>
+          <div class="wmeta"><span class="wtype">Regulatory (BLA filing)</span> · <span class="wwhen">End Q3 2026</span></div>
+          <div class="wfunds">AVORO</div>
+        </div>
+        <div class="wcard filterable" data-funds="avoro frazier">
+          <div class="wtop"><span class="tk">CYTK</span><span class="wcd">T−121 d</span></div>
+          <div class="wasset">aficamten (Myqorzo)</div>
+          <div class="wind">Obstructive HCM (monotherapy)</div>
+          <div class="wmeta"><span class="wtype">PDUFA</span> · <span class="wwhen">Nov 14, 2026</span></div>
+          <div class="wfunds">AVORO FRAZIER</div>
+        </div>
+        <div class="wcard filterable" data-funds="avoro rtw">
+          <div class="wtop"><span class="tk">ARGX</span><span class="wcd">T−122 d</span></div>
+          <div class="wasset">empasiprubart</div>
+          <div class="wind">Multifocal motor neuropathy (MMN)</div>
+          <div class="wmeta"><span class="wtype">Phase 3 readout</span> · <span class="wwhen">Q4 2026</span></div>
+          <div class="wfunds">RTW AVORO</div>
+        </div>
+        <div class="wcard filterable" data-funds="frazier">
+          <div class="wtop"><span class="tk">MIRM</span><span class="wcd">T−122 d</span></div>
+          <div class="wasset">volixibat</div>
+          <div class="wind">Primary sclerosing cholangitis (PSC)</div>
+          <div class="wmeta"><span class="wtype">Regulatory (NDA filing)</span> · <span class="wwhen">H2 2026</span></div>
+          <div class="wfunds">FRAZIER</div>
+        </div>
+        <div class="wcard filterable" data-funds="frazier">
+          <div class="wtop"><span class="tk">NAMS</span><span class="wcd">T−122 d</span></div>
+          <div class="wasset">obicetrapib</div>
+          <div class="wind">LDL-C lowering / ASCVD</div>
+          <div class="wmeta"><span class="wtype">Regulatory (EMA decision)</span> · <span class="wwhen">H2 2026</span></div>
+          <div class="wfunds">FRAZIER</div>
+        </div>
+        <div class="wcard filterable" data-funds="frazier">
+          <div class="wtop"><span class="tk">IRON</span><span class="wcd">T−122 d</span></div>
+          <div class="wasset">bitopertin</div>
+          <div class="wind">Erythropoietic protoporphyria (EPP)</div>
+          <div class="wmeta"><span class="wtype">Phase 3 readout</span> · <span class="wwhen">Q4 2026</span></div>
+          <div class="wfunds">FRAZIER</div>
+        </div></div>
+
+<h2>Catalyst Calendar <span class="hint">upcoming, by time to event</span></h2>
+
+        <div class="bucket"><h3 class="bhead">Next 30 days <span class="bcount">1</span></h3>
+        <table class="cattable"><tbody>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Summer 2026</div><span class="cd">T−30 d</span></td>
+      <td class="c-tk"><span class="tk">BBIO</span></td>
+      <td class="c-what"><span class="ico">▶</span><span class="ctype">Trial start</span>
+          <div class="asset">encaleret <span class="ind">Chronic hypoparathyroidism</span></div>
+          <div class="desc">Registrational Phase 3 RECLAIM-HP initiation in chronic hypoparathyroidism (much larger indication than ADH1).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr></tbody></table></div>
+        <div class="bucket"><h3 class="bhead">31–90 days <span class="bcount">5</span></h3>
+        <table class="cattable"><tbody>
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">Q3 2026</div><span class="cd">T−46 d</span></td>
+      <td class="c-tk"><span class="tk">ARGX</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">efgartigimod (Vyvgart) <span class="ind">Myositis</span></div>
+          <div class="desc">Registrational Phase 3 topline in myositis. Part of a multi-indication expansion (ITP, CIDP, ocular, Sjogren&#x27;s) across 2026-2027.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="rtw">
+      <td class="c-when"><div class="when-main">Q3 2026</div><span class="cd">T−61 d</span></td>
+      <td class="c-tk"><span class="tk">PTGX</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
+          <div class="asset">rusfertide <span class="ind">Polycythemia vera</span></div>
+          <div class="desc">FDA PDUFA target action date (Priority Review) for first-in-class hepcidin mimetic. Approval triggers $75M milestone; Protagonist opted out of US P&amp;L sharing for 14-29% royalties.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier rtw">
+      <td class="c-when"><div class="when-main">2026</div><span class="cd">T−76 d</span></td>
+      <td class="c-tk"><span class="tk">ERAS</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 / partnering</span>
+          <div class="asset">naporafenib <span class="ind">NRAS-mutant melanoma</span></div>
+          <div class="desc">Pan-RAF inhibitor; company seeking a partner for the Phase 3 asset while prioritizing RAS franchise (cash runway to H2 2028).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro">
+      <td class="c-when"><div class="when-main">End Q3 2026</div><span class="cd">T−76 d</span></td>
+      <td class="c-tk"><span class="tk">MLTX</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Regulatory (BLA filing)</span>
+          <div class="asset">sonelokimab <span class="ind">Hidradenitis suppurativa</span></div>
+          <div class="desc">Nanobody IL-17A/F inhibitor; FDA confirmed existing MIRA + VELA data support a BLA. VELA Week-52 HS data strong (67% HiSCR75). First HS approval opportunity.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">2026</div><span class="cd">T−77 d</span></td>
+      <td class="c-tk"><span class="tk">MBX</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Trial start (Phase 3)</span>
+          <div class="asset">canvuparatide (MBX-2109) <span class="ind">Chronic hypoparathyroidism</span></div>
+          <div class="desc">Once-weekly PTH replacement; positive Phase 2 Avail (63% responders vs 31% placebo) and successful End-of-Phase-2 FDA meeting. Phase 3 initiation is the next step.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr></tbody></table></div>
+        <div class="bucket"><h3 class="bhead">91–180 days <span class="bcount">17</span></h3>
+        <table class="cattable"><tbody>
+    <tr class="catrow filterable imp-medium" data-funds="rtw">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−91 d</span></td>
+      <td class="c-tk"><span class="tk">INSM</span></td>
+      <td class="c-what"><span class="ico">▶</span><span class="ctype">Trial start / progression</span>
+          <div class="asset">TPIP <span class="ind">PH-ILD / PAH / IPF</span></div>
+          <div class="desc">Multiple TPIP Phase 3 starts (PAH early 2026; PPF &amp; IPF H2 2026). Broadens beyond newly-launched BRINSUPRI.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro frazier">
+      <td class="c-when"><div class="when-main">Nov 14, 2026</div><span class="cd">T−121 d</span></td>
+      <td class="c-tk"><span class="tk">CYTK</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
+          <div class="asset">aficamten (Myqorzo) <span class="ind">Obstructive HCM (monotherapy)</span></div>
+          <div class="desc">sNDA PDUFA for aficamten monotherapy vs metoprolol in obstructive HCM. Adds to the oHCM approval; cardiac myosin inhibitor franchise vs Bristol&#x27;s Camzyos.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">ARGX</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">empasiprubart <span class="ind">Multifocal motor neuropathy (MMN)</span></div>
+          <div class="desc">Registrational MMN readout for anti-C2 antibody empasiprubart.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">MIRM</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (NDA filing)</span>
+          <div class="asset">volixibat <span class="ind">Primary sclerosing cholangitis (PSC)</span></div>
+          <div class="desc">NDA submission planned H2 2026 after VISTAS Phase 2b MET its primary endpoint; pre-NDA FDA meeting summer 2026. Full data presented at EASL (May 30, 2026).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">MIRM</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">LIVMARLI (maralixibat) <span class="ind">Cholestatic pruritus (label expansion)</span></div>
+          <div class="desc">Topline from Phase 3 EXPAND in additional rare cholestatic conditions.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-low" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">MIRM</span></td>
+      <td class="c-what"><span class="ico">▶</span><span class="ctype">Enrollment milestone</span>
+          <div class="asset">volixibat <span class="ind">Primary biliary cholangitis (PBC)</span></div>
+          <div class="desc">VANTAGE Phase 3 PBC expected to complete enrollment H2 2026.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--muted)">Low</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">MIRM</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
+          <div class="asset">brelovitug <span class="ind">Chronic hepatitis delta (HDV)</span></div>
+          <div class="desc">Topline from AZURE-1 and AZURE-4 in H2 2026 (interim reported Q2 2026).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">NAMS</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (EMA decision)</span>
+          <div class="asset">obicetrapib <span class="ind">LDL-C lowering / ASCVD</span></div>
+          <div class="desc">EMA approval decision for obicetrapib and obicetrapib/ezetimibe FDC. US filing follows positive Phase 3 BROADWAY (21% MACE reduction) and TANDEM.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">KRYS</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Registrational readout</span>
+          <div class="asset">KB803 / KB801 <span class="ind">DEB corneal abrasion / neurotrophic keratitis</span></div>
+          <div class="desc">Registrational data readouts on track for 2026 (ophthalmology franchise beyond Vyjuvek).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-low" data-funds="avoro">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">KRYS</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 1 readout</span>
+          <div class="asset">KB407 <span class="ind">Cystic fibrosis</span></div>
+          <div class="desc">Inhaled redosable CFTR gene therapy; FDA platform technology designation granted.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--muted)">Low</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">IRON</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">bitopertin <span class="ind">Erythropoietic protoporphyria (EPP)</span></div>
+          <div class="desc">After a CRL, FDA aligned that a successful Phase 3 APOLLO can support approval. APOLLO data expected Q4 2026; CRL response to follow with a decision expected mid-2027.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Q4 2026</div><span class="cd">T−122 d</span></td>
+      <td class="c-tk"><span class="tk">ACRS</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
+          <div class="asset">bosakitug (ATI-045) <span class="ind">Atopic dermatitis</span></div>
+          <div class="desc">Anti-TSLP mAb; Phase 2 AD enrollment complete (109 pts), topline expected Q4 2026.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−152 d</span></td>
+      <td class="c-tk"><span class="tk">ARQT</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
+          <div class="asset">ZORYVE (roflumilast) <span class="ind">Atopic dermatitis, infants 3-24 months</span></div>
+          <div class="desc">sNDA under review to expand atopic dermatitis into infants; PDUFA expected H2 2026.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-low" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H2 2026</div><span class="cd">T−152 d</span></td>
+      <td class="c-tk"><span class="tk">ARQT</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
+          <div class="asset">ARQ-234 / roflumilast <span class="ind">Vitiligo, hidradenitis suppurativa</span></div>
+          <div class="desc">Phase 2 dermatology pipeline readouts (vitiligo, HS).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--muted)">Low</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="frazier rtw">
+      <td class="c-when"><div class="when-main">2026</div><span class="cd">T−152 d</span></td>
+      <td class="c-tk"><span class="tk">ERAS</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 1 readout</span>
+          <div class="asset">ERAS-0015 / ERAS-4001 <span class="ind">RAS-mutant solid tumors</span></div>
+          <div class="desc">First Phase 1 monotherapy data for pan-RAS molecular glue (ERAS-0015) and pan-KRAS inhibitor (ERAS-4001) — the prioritized RAS franchise.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="rtw">
+      <td class="c-when"><div class="when-main">2026–2027</div><span class="cd">T−168 d</span></td>
+      <td class="c-tk"><span class="tk">IMVT</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">IMVT-1402 <span class="ind">Graves&#x27; disease, RA, MG, CIDP, Sjogren&#x27;s</span></div>
+          <div class="desc">Next-gen subcutaneous FcRn inhibitor advancing in six indications after the company deprioritized batoclimab. First potentially-registrational readouts (Graves&#x27;, RA lead) drive the story; differentiated on deep IgG lowering without albumin/LDL effects.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro">
+      <td class="c-when"><div class="when-main">Year-end 2026</div><span class="cd">T−168 d</span></td>
+      <td class="c-tk"><span class="tk">KYMR</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2b readout</span>
+          <div class="asset">KT-621 <span class="ind">Atopic dermatitis</span></div>
+          <div class="desc">First-in-class oral STAT6 degrader; BROADEN2 topline pulled forward ~6 months to year-end 2026. An oral alternative to injectable Dupixent-class biology — high-conviction binary.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr></tbody></table></div>
+        <div class="bucket"><h3 class="bhead">6–12 months <span class="bcount">10</span></h3>
+        <table class="cattable"><tbody>
+    <tr class="catrow filterable imp-high" data-funds="frazier">
+      <td class="c-when"><div class="when-main">H1 2027 (est.)</div><span class="cd">T−258 d</span></td>
+      <td class="c-tk"><span class="tk">BBIO</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (NDA review)</span>
+          <div class="asset">encaleret <span class="ind">Autosomal dominant hypocalcemia type 1 (ADH1)</span></div>
+          <div class="desc">NDA submitted to FDA May 12, 2026 after positive Phase 3; awaiting acceptance/PDUFA. 76% of patients hit target calcium normalization.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro">
+      <td class="c-when"><div class="when-main">2027 (est.)</div><span class="cd">T−258 d</span></td>
+      <td class="c-tk"><span class="tk">UTHR</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">Regulatory (sNDA/PDUFA)</span>
+          <div class="asset">Tyvaso (treprostinil) <span class="ind">IPF</span></div>
+          <div class="desc">Expected sNDA filing and FDA decision for Tyvaso in IPF following TETON-1/2.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">2027</div><span class="cd">T−349 d</span></td>
+      <td class="c-tk"><span class="tk">MDGL</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (outcomes)</span>
+          <div class="asset">Rezdiffra (resmetirom) <span class="ind">Compensated MASH cirrhosis (F4c)</span></div>
+          <div class="desc">Outcomes trial in compensated MASH cirrhosis — expands the addressable population beyond F2/F3.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro">
+      <td class="c-when"><div class="when-main">2027+</div><span class="cd">T−349 d</span></td>
+      <td class="c-tk"><span class="tk">AKRO</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (outcomes)</span>
+          <div class="asset">efruxifermin (EFX) <span class="ind">Compensated MASH cirrhosis (F4)</span></div>
+          <div class="desc">FGF21 analog; Phase 3 SYNCHRONY program across F2/F3, cirrhosis (F4) and pre-cirrhosis. Directly competes/complements the MASH thesis alongside MDGL.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
+      <td class="c-when"><div class="when-main">2027</div><span class="cd">T−349 d</span></td>
+      <td class="c-tk"><span class="tk">MLTX</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 3 (progression)</span>
+          <div class="asset">sonelokimab <span class="ind">Psoriatic arthritis</span></div>
+          <div class="desc">Phase 3 PsA program initiated after positive FDA/EMA feedback — pipeline-in-a-product expansion.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">H2 2027</div><span class="cd">T−441 d</span></td>
+      <td class="c-tk"><span class="tk">ARGX</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">efgartigimod (Vyvgart) <span class="ind">Sjogren&#x27;s disease</span></div>
+          <div class="desc">Phase 3 UNITY topline in moderate-to-severe Sjogren&#x27;s disease.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="frazier">
+      <td class="c-when"><div class="when-main">2027+</div><span class="cd">T−533 d</span></td>
+      <td class="c-tk"><span class="tk">NAMS</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (CVOT)</span>
+          <div class="asset">obicetrapib <span class="ind">Cardiovascular outcomes</span></div>
+          <div class="desc">PREVAIL CVOT (9,500+ pts, enrolled Apr 2024) event-driven; event rate tracking in line with BROADWAY. The definitive outcomes catalyst.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="rtw">
+      <td class="c-when"><div class="when-main">2027+</div><span class="cd">T−533 d</span></td>
+      <td class="c-tk"><span class="tk">PTCT</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 (partner-led)</span>
+          <div class="asset">votoplam (PTC518) <span class="ind">Huntington&#x27;s disease</span></div>
+          <div class="desc">Positive PIVOT-HD 24-mo extension (52% slowing at 10mg, Apr 28 2026). Novartis-run global Phase 3 INVEST-HD (~770 pts) now the key readout; PTCT earns milestones/royalties.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">BLA end-2027</div><span class="cd">T−533 d</span></td>
+      <td class="c-tk"><span class="tk">BCRX</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 3 (progression)</span>
+          <div class="asset">navenibart <span class="ind">Hereditary angioedema</span></div>
+          <div class="desc">Long-acting anti-plasma-kallikrein antibody for HAE; BLA filing planned end-2027 — the next-generation follow-on to ORLADEYO.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">2028</div><span class="cd">T−715 d</span></td>
+      <td class="c-tk"><span class="tk">MDGL</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout (outcomes)</span>
+          <div class="asset">Rezdiffra (resmetirom) <span class="ind">MASH F2/F3 (confirmatory)</span></div>
+          <div class="desc">54-month confirmatory outcomes to convert accelerated approval to full approval.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr></tbody></table></div>
+
+<h2>Positions by Manager <span class="hint">weights from latest 13F; * = estimated weight</span></h2>
+
+        <div class="fund fundblock" data-fund="rtw">
+          <div class="fhead"><h3>RTW Investments, LP</h3><span class="fmeta">Roderick Wong · 97 positions · $10.0B book · 2026-Q1</span></div>
+          <table class="ptable">
+            <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="p-tk">MDGL</td>
+              <td class="p-nm">Madrigal Pharmaceuticals</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:52%"></span><span class="wtn">10.4%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2027 <em>Phase 3 readout (outcomes)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">INSM</td>
+              <td class="p-nm">Insmed</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:40%"></span><span class="wtn">7.9%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>H2 2026 <em>Trial start / progression</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">PTGX</td>
+              <td class="p-nm">Protagonist Therapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:26%"></span><span class="wtn">5.3%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Q3 2026 <em>PDUFA</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">PTCT</td>
+              <td class="p-nm">PTC Therapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:26%"></span><span class="wtn">5.3%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2027+ <em>Phase 3 (partner-led)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ARGX</td>
+              <td class="p-nm">argenx SE</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:26%"></span><span class="wtn">5.2%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Q3 2026 <em>Phase 3 readout</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ERAS</td>
+              <td class="p-nm">Erasca</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:12%"></span><span class="wtn">2.5% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2026 <em>Phase 3 / partnering</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">APLS</td>
+              <td class="p-nm">Apellis Pharmaceuticals</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:12%"></span><span class="wtn">2.4% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='none'>—</span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">IRTC</td>
+              <td class="p-nm">iRhythm Technologies</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:10%"></span><span class="wtn">2.1% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='none'>—</span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">IMVT</td>
+              <td class="p-nm">Immunovant</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:6%"></span><span class="wtn">1.3% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2026–2027 <em>Phase 3 readout</em></span></td>
+            </tr></tbody>
+          </table>
+        </div>
+        <div class="fund fundblock" data-fund="avoro">
+          <div class="fhead"><h3>Avoro Capital Advisors LLC</h3><span class="fmeta">Behzad Aghazadeh / Robert Adelman · 32 positions · $10.2B book · 2026-Q1</span></div>
+          <table class="ptable">
+            <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="p-tk">UTHR</td>
+              <td class="p-nm">United Therapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:77%"></span><span class="wtn">15.3%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2027 (est.) <em>Regulatory (sNDA/PDUFA)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ASND</td>
+              <td class="p-nm">Ascendis Pharma</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:57%"></span><span class="wtn">11.4%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='none'>—</span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">MDGL</td>
+              <td class="p-nm">Madrigal Pharmaceuticals</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:47%"></span><span class="wtn">9.4%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2027 <em>Phase 3 readout (outcomes)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">KRYS</td>
+              <td class="p-nm">Krystal Biotech</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:37%"></span><span class="wtn">7.3%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>H2 2026 <em>Registrational readout</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ARGX</td>
+              <td class="p-nm">argenx SE</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:36%"></span><span class="wtn">7.2%</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Q3 2026 <em>Phase 3 readout</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">CYTK</td>
+              <td class="p-nm">Cytokinetics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:22%"></span><span class="wtn">4.5% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Nov 14, 2026 <em>PDUFA</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">AKRO</td>
+              <td class="p-nm">Akero Therapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:20%"></span><span class="wtn">4.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2027+ <em>Phase 3 readout (outcomes)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">KYMR</td>
+              <td class="p-nm">Kymera Therapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:18%"></span><span class="wtn">3.5% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Year-end 2026 <em>Phase 2b readout</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">MLTX</td>
+              <td class="p-nm">MoonLake Immunotherapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:16%"></span><span class="wtn">3.2% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>End Q3 2026 <em>Regulatory (BLA filing)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">APLS</td>
+              <td class="p-nm">Apellis Pharmaceuticals</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:15%"></span><span class="wtn">3.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='none'>—</span></td>
+            </tr></tbody>
+          </table>
+        </div>
+        <div class="fund fundblock" data-fund="frazier">
+          <div class="fhead"><h3>Frazier Life Sciences Management, L.P.</h3><span class="fmeta">Frazier Life Sciences · — positions · — book · 2026-Q1</span></div>
+          <table class="ptable">
+            <thead><tr><th>Ticker</th><th>Company</th><th>Weight</th><th>Last</th><th>YTD</th><th>Next catalyst</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="p-tk">MIRM</td>
+              <td class="p-nm">Mirum Pharmaceuticals</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:70%"></span><span class="wtn">14.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>H2 2026 <em>Regulatory (NDA filing)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">NAMS</td>
+              <td class="p-nm">NewAmsterdam Pharma</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:65%"></span><span class="wtn">13.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>H2 2026 <em>Regulatory (EMA decision)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ERAS</td>
+              <td class="p-nm">Erasca</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:52%"></span><span class="wtn">10.5% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2026 <em>Phase 3 / partnering</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">BBIO</td>
+              <td class="p-nm">BridgeBio Pharma</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:48%"></span><span class="wtn">9.5% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Summer 2026 <em>Trial start</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ARQT</td>
+              <td class="p-nm">Arcutis Biotherapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:40%"></span><span class="wtn">8.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>H2 2026 <em>PDUFA</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">MBX</td>
+              <td class="p-nm">MBX Biosciences</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:30%"></span><span class="wtn">6.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>2026 <em>Trial start (Phase 3)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">BCRX</td>
+              <td class="p-nm">BioCryst Pharmaceuticals</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:25%"></span><span class="wtn">5.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>BLA end-2027 <em>Phase 3 (progression)</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">ACRS</td>
+              <td class="p-nm">Aclaris Therapeutics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:20%"></span><span class="wtn">4.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Q4 2026 <em>Phase 2 readout</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">CYTK</td>
+              <td class="p-nm">Cytokinetics</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:18%"></span><span class="wtn">3.5% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Nov 14, 2026 <em>PDUFA</em></span></td>
+            </tr>
+            <tr>
+              <td class="p-tk">IRON</td>
+              <td class="p-nm">Disc Medicine</td>
+              <td class="p-wt"><div class="wtwrap"><span class="wtbar" style="width:15%"></span><span class="wtn">3.0% *</span></div></td>
+              <td class="p-px">—</td>
+              <td class="p-ytd flat">—</td>
+              <td class="p-next"><span class='nc'>Q4 2026 <em>Phase 3 readout</em></span></td>
+            </tr></tbody>
+          </table>
+        </div>
+
+<h2>Cross-Fund Conviction <span class="hint">names held by more than one manager</span></h2>
+<table class="otable">
+  <thead><tr><th>Ticker</th><th>Company</th><th>Funds</th><th>Held by</th><th>YTD</th><th>Next catalyst</th></tr></thead>
+  <tbody>
+        <tr class="filterable" data-funds="avoro rtw"><td class="o-tk">MDGL</td><td>Madrigal Pharmaceuticals</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
+            <td class="flat">—</td><td class="o-next">2027 — Rezdiffra (resmetirom)</td></tr>
+        <tr class="filterable" data-funds="avoro rtw"><td class="o-tk">ARGX</td><td>argenx SE</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
+            <td class="flat">—</td><td class="o-next">Q3 2026 — efgartigimod (Vyvgart)</td></tr>
+        <tr class="filterable" data-funds="frazier rtw"><td class="o-tk">ERAS</td><td>Erasca</td><td class="o-n">2</td><td><span class="fundchip">FRAZIER</span> <span class="fundchip">RTW</span></td>
+            <td class="flat">—</td><td class="o-next">2026 — naporafenib</td></tr>
+        <tr class="filterable" data-funds="avoro rtw"><td class="o-tk">APLS</td><td>Apellis Pharmaceuticals</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">RTW</span></td>
+            <td class="flat">—</td><td class="o-next">—</td></tr>
+        <tr class="filterable" data-funds="avoro frazier"><td class="o-tk">CYTK</td><td>Cytokinetics</td><td class="o-n">2</td><td><span class="fundchip">AVORO</span> <span class="fundchip">FRAZIER</span></td>
+            <td class="flat">—</td><td class="o-next">Nov 14, 2026 — aficamten (Myqorzo)</td></tr></tbody>
+</table>
+
+<h2>Performance <span class="hint">total return; source Stooq EOD</span></h2>
+<p class='empty'>Price data populates after the first data-refresh run (scripts/refresh_prices.py).</p>
+<table class="otable">
+  <thead><tr><th>Ticker</th><th>Company</th><th>Last</th><th>1M</th><th>3M</th><th>YTD</th><th>12M</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<h2>Recent Readouts <span class="hint">reported catalysts to review</span></h2>
+<table class="cattable"><tbody>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Jun 29, 2026</div></td>
+      <td class="c-tk"><span class="tk">ARQT</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
+          <div class="asset">ZORYVE (roflumilast) cream 0.3% <span class="ind">Pediatric plaque psoriasis (ages 2-5)</span></div>
+          <div class="desc">PDUFA decision for pediatric psoriasis label expansion.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="rtw">
+      <td class="c-when"><div class="when-main">Q2 2026</div></td>
+      <td class="c-tk"><span class="tk">INSM</span></td>
+      <td class="c-what"><span class="ico">○</span><span class="ctype">Phase 2 readout</span>
+          <div class="asset">brensocatib (BRINSUPRI) <span class="ind">Hidradenitis suppurativa</span></div>
+          <div class="desc">Phase 2b CEDAR topline in HS; pipeline-in-a-product expansion beyond bronchiectasis.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro frazier">
+      <td class="c-when"><div class="when-main">May 2026</div></td>
+      <td class="c-tk"><span class="tk">CYTK</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">aficamten (Myqorzo) <span class="ind">Non-obstructive HCM</span></div>
+          <div class="desc">ACACIA-HCM MET both dual primary endpoints (KCCQ + peak VO2) in non-obstructive HCM — expands aficamten into a large new population.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="rtw">
+      <td class="c-when"><div class="when-main">Mar-Apr 2026</div></td>
+      <td class="c-tk"><span class="tk">INSM</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">ARIKAYCE <span class="ind">MAC lung disease (front-line)</span></div>
+          <div class="desc">Topline ENCORE in newly-diagnosed/recurrent MAC; supports sNDA for all MAC patients (submission H2 2026).</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro">
+      <td class="c-when"><div class="when-main">Mar 30, 2026</div></td>
+      <td class="c-tk"><span class="tk">UTHR</span></td>
+      <td class="c-what"><span class="ico">◉</span><span class="ctype">Phase 3 readout</span>
+          <div class="asset">Tyvaso (treprostinil) <span class="ind">Idiopathic pulmonary fibrosis (IPF)</span></div>
+          <div class="desc">TETON-1 MET primary endpoint (FVC) + key secondary; follows positive TETON-2. Stock +14% on release. Opens large IPF opportunity — watch for sNDA filing/PDUFA next.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro">
+      <td class="c-when"><div class="when-main">Feb 28, 2026</div></td>
+      <td class="c-tk"><span class="tk">ASND</span></td>
+      <td class="c-what"><span class="ico">⚖</span><span class="ctype">PDUFA</span>
+          <div class="asset">navepegritide (TransCon CNP) <span class="ind">Achondroplasia (children)</span></div>
+          <div class="desc">PDUFA (extended from major amendment). Phase 2 COACH Wk52 growth velocity exceeded 97th percentile of average-stature children.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr></tbody></table>
+
+<h2>Recurring Watch-items <span class="hint">quarterly commercial trajectories</span></h2>
+<table class="cattable"><tbody>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">BBIO</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">acoramidis (Attruby) <span class="ind">ATTR-CM</span></div>
+          <div class="desc">Attruby launch ramp in ATTR cardiomyopathy — watch quarterly net sales trajectory.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="rtw">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">INSM</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">BRINSUPRI (brensocatib) <span class="ind">Non-CF bronchiectasis</span></div>
+          <div class="desc">US (Aug 2025) + EU (Nov 2025) launch; +44% QoQ global revenue in Q1 2026. Track launch trajectory each quarter.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-high" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">MDGL</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">Rezdiffra (resmetirom) <span class="ind">MASH</span></div>
+          <div class="desc">&gt;42,250 patients on drug as of Mar 31 2026 (2.5x YoY); Q1 revenue +127% YoY. Track quarterly script growth.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--critical)">High</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">ASND</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">TransCon PTH (Yorvipath) <span class="ind">Hypoparathyroidism</span></div>
+          <div class="desc">Yorvipath US/EU launch ramp — quarterly revenue trajectory.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">KRYS</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">VYJUVEK <span class="ind">Dystrophic epidermolysis bullosa</span></div>
+          <div class="desc">$116.4M Q1 global revenue ($846.7M since launch). Track ex-US expansion + respiratory/ophthal label extensions.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="rtw">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">PTCT</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial / launch</span>
+          <div class="asset">sepiapterin (Sephience) <span class="ind">PKU</span></div>
+          <div class="desc">PKU franchise launch trajectory post-approval.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro rtw">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">APLS</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">pegcetacoplan (Syfovre/Empaveli) <span class="ind">Geographic atrophy / C3G / IC-MPGN</span></div>
+          <div class="desc">Syfovre GA franchise + Empaveli rare-renal (C3G/IC-MPGN) expansion. Track quarterly net product revenue and new-indication uptake.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="RTW Investments, LP">RTW</span><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="avoro frazier">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">CYTK</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">aficamten (Myqorzo) <span class="ind">Obstructive HCM</span></div>
+          <div class="desc">EU-approved (Myqorzo); ~680 patients dosed in Q1 2026. Track US/EU launch trajectory each quarter.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Avoro Capital Advisors LLC">AVORO</span><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr>
+    <tr class="catrow filterable imp-medium" data-funds="frazier">
+      <td class="c-when"><div class="when-main">Quarterly</div><span class="cd">T−20 d</span></td>
+      <td class="c-tk"><span class="tk">BCRX</span></td>
+      <td class="c-what"><span class="ico">■</span><span class="ctype">Commercial update</span>
+          <div class="asset">ORLADEYO (berotralstat) <span class="ind">Hereditary angioedema</span></div>
+          <div class="desc">Oral HAE prophylaxis; Q1 2026 net revenue $148.3M (+11% YoY), FY26 target $625–645M. Track quarterly sales toward guidance.</div></td>
+      <td class="c-imp"><span class="badge" style="--bc:var(--warning)">Medium</span></td>
+      <td class="c-funds"><span class="fundchip" title="Frazier Life Sciences Management, L.P.">FRAZIER</span></td>
+    </tr></tbody></table>
+
+<footer>
+  <p><b>Not investment advice.</b> Educational tool. Catalyst dates are estimates compiled from company IR
+  communications and public reporting and can shift; verify against primary sources before acting.</p>
+  <p>Data: SEC EDGAR 13F-HR (holdings) · ClinicalTrials.gov (trial status) · Stooq (prices).
+  Regenerate with <code>python scripts/build_dashboard.py</code>.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var COUNTS = {"all": {"pos": 29, "upc": 33, "watch": 8, "name": "All managers"}, "rtw": {"pos": 9, "upc": 11, "watch": 3, "name": "RTW Investments, LP"}, "avoro": {"pos": 10, "upc": 13, "watch": 4, "name": "Avoro Capital Advisors LLC"}, "frazier": {"pos": 10, "upc": 17, "watch": 4, "name": "Frazier Life Sciences Management, L.P."}};
+  var bar = document.getElementById('mgrfilter');
+  if(!bar) return;
+  var btns = Array.prototype.slice.call(bar.querySelectorAll('.fbtn'));
+
+  function apply(fund){
+    // row/card level filter
+    document.querySelectorAll('.filterable').forEach(function(el){
+      var f = el.getAttribute('data-funds') || '';
+      var show = (fund === 'all') || f.split(' ').indexOf(fund) !== -1;
+      el.hidden = !show;
+    });
+    // whole manager blocks (Positions by Manager)
+    document.querySelectorAll('.fundblock').forEach(function(el){
+      el.hidden = !(fund === 'all' || el.getAttribute('data-fund') === fund);
+    });
+    // collapse empty calendar buckets
+    document.querySelectorAll('.bucket').forEach(function(b){
+      var any = Array.prototype.slice.call(b.querySelectorAll('tr.filterable'))
+                 .some(function(r){ return !r.hidden; });
+      b.hidden = !any;
+    });
+    // empty-state message for the watch grid
+    var watchAny = Array.prototype.slice.call(document.querySelectorAll('.wcard'))
+                    .some(function(c){ return !c.hidden; });
+    var em = document.getElementById('empty-watch');
+    if(em) em.hidden = watchAny;
+
+    // KPIs
+    var c = COUNTS[fund] || COUNTS.all;
+    setText('kpi-pos', c.pos);
+    setText('kpi-upc', c.upc);
+    setText('kpi-watch', c.watch);
+    setText('kpi-mgr', fund === 'all' ? Object.keys(COUNTS).length - 1 : 1);
+    setText('kctx-pos', fund === 'all' ? '' : '· ' + c.name.split(',')[0]);
+
+    btns.forEach(function(b){
+      var on = b.getAttribute('data-fund') === fund;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    try { history.replaceState(null, '', fund === 'all' ? location.pathname : '#' + fund); } catch(e){}
+  }
+  function setText(id, v){ var e = document.getElementById(id); if(e) e.textContent = v; }
+
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-fund')); });
+  });
+
+  // honor a deep link like #rtw on load
+  var initial = (location.hash || '').replace('#','');
+  apply(COUNTS[initial] ? initial : 'all');
+})();
+</script>
+</body>
+</html>
