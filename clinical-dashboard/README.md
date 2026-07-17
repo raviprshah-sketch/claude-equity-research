@@ -5,6 +5,10 @@ held by three healthcare/biotech managers — **RTW Investments**, **Avoro Capit
 Advisors**, and **Frazier Life Sciences** — and emails a monthly performance +
 catalyst brief.
 
+**🔗 Live dashboard:** https://raviprshah-sketch.github.io/claude-equity-research/
+(published by GitHub Pages, auto-refreshed weekly — see [Hosting](#hosting-github-pages)
+for the one-time enable step).
+
 It answers, at a glance:
 
 - **What's about to move?** A *Meaningful Readout Watch* of near-term, high-impact
@@ -86,13 +90,31 @@ Open `output/dashboard.html` in a browser.
 
 ---
 
+## Hosting (GitHub Pages)
+
+The `pages.yml` workflow publishes the dashboard as a normal web page at
+**https://raviprshah-sketch.github.io/claude-equity-research/**. One-time setup
+(the workflows must be on the default branch first, so merge the PR):
+
+1. Merge this branch into `main`.
+2. Repo → **Settings → Pages → Build and deployment → Source: “GitHub Actions.”**
+3. Deploy immediately: **Actions → “Deploy dashboard to GitHub Pages” → Run
+   workflow** (or just wait for the Monday schedule).
+
+After that the site redeploys automatically every Monday (right after the data
+refresh commits) and on any push to `main` that touches the dashboard.
+`…/monthly_email.html` is also served for a browser preview of the email.
+
+---
+
 ## Automation (GitHub Actions)
 
-Two scheduled workflows are included and also run on-demand from the **Actions** tab:
+Three workflows are included; all also run on-demand from the **Actions** tab:
 
 | Workflow | Schedule | Does |
 |----------|----------|------|
 | `dashboard-refresh.yml` | Mondays 12:00 UTC | Refresh holdings/prices/trials, rebuild dashboard, commit |
+| `pages.yml` | Mondays 12:45 UTC | Rebuild from committed data and deploy to GitHub Pages |
 | `monthly-email.yml` | 1st of month 13:00 UTC | Refresh, build brief, email it, commit |
 
 ### Secrets to configure

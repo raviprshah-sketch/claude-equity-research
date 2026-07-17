@@ -1,0 +1,65 @@
+name: Deploy dashboard to GitHub Pages
+
+# Publishes clinical-dashboard/output/dashboard.html as the site's home page at
+# https://<owner>.github.io/<repo>/ . Rebuilds from the committed data files, so
+# the live site always matches the repo. The weekly data-refresh job commits fresh
+# data first (Mondays 12:00 UTC); this deploy runs shortly after (12:45 UTC) to
+# pick it up, and also on any push to main that touches the dashboard, plus on
+# demand from the Actions tab.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "clinical-dashboard/**"
+      - ".github/workflows/pages.yml"
+  schedule:
+    - cron: "45 12 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild dashboard & email from committed data
+        working-directory: clinical-dashboard
+        run: |
+          python scripts/build_dashboard.py
+          python scripts/build_email.py
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp clinical-dashboard/output/dashboard.html _site/index.html
+          cp clinical-dashboard/output/monthly_email.html _site/monthly_email.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
