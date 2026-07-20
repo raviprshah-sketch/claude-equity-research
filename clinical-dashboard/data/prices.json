@@ -1,5 +1,101 @@
 {
-  "_comment": "Populated by scripts/refresh_prices.py (Stooq EOD) in GitHub Actions. Empty until first refresh.",
-  "as_of": null,
-  "prices": {}
+  "as_of": "2026-07-20",
+  "prices": {
+    "ACRS": {
+      "last": null,
+      "error": "no data"
+    },
+    "AKRO": {
+      "last": null,
+      "error": "no data"
+    },
+    "APLS": {
+      "last": null,
+      "error": "no data"
+    },
+    "ARGX": {
+      "last": null,
+      "error": "no data"
+    },
+    "ARQT": {
+      "last": null,
+      "error": "no data"
+    },
+    "ASND": {
+      "last": null,
+      "error": "no data"
+    },
+    "BBIO": {
+      "last": null,
+      "error": "no data"
+    },
+    "BCRX": {
+      "last": null,
+      "error": "no data"
+    },
+    "CYTK": {
+      "last": null,
+      "error": "no data"
+    },
+    "ERAS": {
+      "last": null,
+      "error": "no data"
+    },
+    "IMVT": {
+      "last": null,
+      "error": "no data"
+    },
+    "INSM": {
+      "last": null,
+      "error": "no data"
+    },
+    "IRON": {
+      "last": null,
+      "error": "no data"
+    },
+    "IRTC": {
+      "last": null,
+      "error": "no data"
+    },
+    "KRYS": {
+      "last": null,
+      "error": "no data"
+    },
+    "KYMR": {
+      "last": null,
+      "error": "no data"
+    },
+    "MBX": {
+      "last": null,
+      "error": "no data"
+    },
+    "MDGL": {
+      "last": null,
+      "error": "no data"
+    },
+    "MIRM": {
+      "last": null,
+      "error": "no data"
+    },
+    "MLTX": {
+      "last": null,
+      "error": "no data"
+    },
+    "NAMS": {
+      "last": null,
+      "error": "no data"
+    },
+    "PTCT": {
+      "last": null,
+      "error": "no data"
+    },
+    "PTGX": {
+      "last": null,
+      "error": "no data"
+    },
+    "UTHR": {
+      "last": null,
+      "error": "no data"
+    }
+  }
 }
