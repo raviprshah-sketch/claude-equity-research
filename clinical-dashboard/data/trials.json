@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-08-17",
+  "as_of": "2026-08-24",
   "trials": {
     "MDGL": [
       {
@@ -157,12 +157,20 @@
     ],
     "INSM": [
       {
-        "nct": "NCT07765706",
-        "title": "A Study to Assess the Safety, Tolerability and Pharmacokinetics (PK) of INS1033 in Healthy Participants",
-        "phase": "PHASE1",
-        "status": "NOT_YET_RECRUITING",
-        "primary_completion": "2027-03-22",
-        "last_update": "2026-08-14"
+        "nct": "NCT05649748",
+        "title": "An Extension Study of Treprostinil Palmitil Inhalation Powder (TPIP) for Pulmonary Arterial Hypertension (PAH)",
+        "phase": "PHASE2,PHASE3",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2026-12-31",
+        "last_update": "2026-08-20"
+      },
+      {
+        "nct": "NCT07481981",
+        "title": "A Study to Evaluate the Efficacy and Safety of Once Daily Treprostinil Palmitil Inhalation Powder (TPIP) in Participants With Pulmonary Arterial Hypertension (PAH)",
+        "phase": "PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2028-12-28",
+        "last_update": "2026-08-19"
       },
       {
         "nct": "NCT07179380",
@@ -170,6 +178,14 @@
         "phase": "PHASE3",
         "status": "RECRUITING",
         "primary_completion": "2028-12-30",
+        "last_update": "2026-08-14"
+      },
+      {
+        "nct": "NCT07765706",
+        "title": "A Study to Assess the Safety, Tolerability and Pharmacokinetics (PK) of INS1033 in Healthy Participants",
+        "phase": "PHASE1",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2027-03-22",
         "last_update": "2026-08-14"
       },
       {
@@ -197,28 +213,12 @@
         "last_update": "2026-07-28"
       },
       {
-        "nct": "NCT05649748",
-        "title": "An Extension Study of Treprostinil Palmitil Inhalation Powder (TPIP) for Pulmonary Arterial Hypertension (PAH)",
-        "phase": "PHASE2,PHASE3",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2026-12-31",
-        "last_update": "2026-07-08"
-      },
-      {
         "nct": "NCT07290062",
         "title": "A Study to Investigate the Safety and Pharmacodynamics of a Single Intrathecal Injection (IT) of INS1202 in Participants With Amyotrophic Lateral Sclerosis (ALS)",
         "phase": "PHASE1",
         "status": "RECRUITING",
         "primary_completion": "2030-03-31",
         "last_update": "2026-07-06"
-      },
-      {
-        "nct": "NCT07481981",
-        "title": "A Study to Evaluate the Efficacy and Safety of Once Daily Treprostinil Palmitil Inhalation Powder (TPIP) in Participants With Pulmonary Arterial Hypertension (PAH)",
-        "phase": "PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2028-12-28",
-        "last_update": "2026-06-10"
       },
       {
         "nct": "NCT05649722",
@@ -357,19 +357,19 @@
         "last_update": "2023-08-22"
       },
       {
-        "nct": "NCT05999942",
-        "title": "A Study to Investigate Lung Deposition of Inhaled Amikacin-loaded Liposomes in Healthy Male Participants",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2004-06-29",
-        "last_update": "2023-08-21"
-      },
-      {
         "nct": "NCT05826574",
         "title": "A Study to Assess Pharmacokinetics (PK) of Brensocatib Alone and With Multiple Doses of Rifampin or Esomeprozole in Healthy Participants",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2023-07-16",
+        "last_update": "2023-08-21"
+      },
+      {
+        "nct": "NCT05999942",
+        "title": "A Study to Investigate Lung Deposition of Inhaled Amikacin-loaded Liposomes in Healthy Male Participants",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2004-06-29",
         "last_update": "2023-08-21"
       },
       {
@@ -397,19 +397,19 @@
         "last_update": "2023-04-18"
       },
       {
-        "nct": "NCT03218917",
-        "title": "Assessment of INS1007 in Participants With Non-Cystic Fibrosis Bronchiectasis",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2019-12-12",
-        "last_update": "2023-03-27"
-      },
-      {
         "nct": "NCT05355935",
         "title": "A Study to Investigate the Effects of Brensocatib on QT Interval in Healthy Participants",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2022-10-07",
+        "last_update": "2023-03-27"
+      },
+      {
+        "nct": "NCT03218917",
+        "title": "Assessment of INS1007 in Participants With Non-Cystic Fibrosis Bronchiectasis",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2019-12-12",
         "last_update": "2023-03-27"
       },
       {
@@ -526,6 +526,14 @@
       }
     ],
     "PTCT": [
+      {
+        "nct": "NCT07779616",
+        "title": "Study of PTC844 in Participants With Active Rheumatoid Arthritis",
+        "phase": "PHASE2",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2027-09-30",
+        "last_update": "2026-08-21"
+      },
       {
         "nct": "NCT07681713",
         "title": "Long-Term Efficacy Study of Vatiquinone for the Treatment of Friedreich's Ataxia (FA)",
@@ -687,19 +695,19 @@
         "last_update": "2023-02-16"
       },
       {
-        "nct": "NCT01395641",
-        "title": "A Phase I/II Clinical Trial for Treatment of Aromatic L-amino Acid Decarboxylase (AADC) Deficiency Using AAV2-hAADC",
-        "phase": "PHASE1,PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2020-12-18",
-        "last_update": "2023-02-10"
-      },
-      {
         "nct": "NCT02926066",
         "title": "A Clinical Trial for Treatment of Aromatic L-amino Acid Decarboxylase (AADC) Deficiency Using AAV2-hAADC - An Expansion",
         "phase": "PHASE2",
         "status": "COMPLETED",
         "primary_completion": "2022-01-24",
+        "last_update": "2023-02-10"
+      },
+      {
+        "nct": "NCT01395641",
+        "title": "A Phase I/II Clinical Trial for Treatment of Aromatic L-amino Acid Decarboxylase (AADC) Deficiency Using AAV2-hAADC",
+        "phase": "PHASE1,PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2020-12-18",
         "last_update": "2023-02-10"
       },
       {
@@ -767,19 +775,19 @@
         "last_update": "2020-10-14"
       },
       {
-        "nct": "NCT01728064",
-        "title": "Safety and Efficacy of EPI-743 in Patients With Friedreich's Ataxia",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2015-10-31",
-        "last_update": "2020-08-31"
-      },
-      {
         "nct": "NCT01721733",
         "title": "Safety and Efficacy Study of EPI-743 in Children With Leigh Syndrome",
         "phase": "PHASE2",
         "status": "COMPLETED",
         "primary_completion": "2015-02-28",
+        "last_update": "2020-08-31"
+      },
+      {
+        "nct": "NCT01728064",
+        "title": "Safety and Efficacy of EPI-743 in Patients With Friedreich's Ataxia",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2015-10-31",
         "last_update": "2020-08-31"
       },
       {
@@ -807,19 +815,19 @@
         "last_update": "2020-06-11"
       },
       {
-        "nct": "NCT02139306",
-        "title": "Study of Ataluren in Nonsense Mutation Cystic Fibrosis (ACT CF)",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2016-11",
-        "last_update": "2020-05-14"
-      },
-      {
         "nct": "NCT00803205",
         "title": "Study of Ataluren (PTC124\u2122) in Cystic Fibrosis",
         "phase": "PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2011-11-12",
+        "last_update": "2020-05-14"
+      },
+      {
+        "nct": "NCT02139306",
+        "title": "Study of Ataluren in Nonsense Mutation Cystic Fibrosis (ACT CF)",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2016-11",
         "last_update": "2020-05-14"
       },
       {
@@ -855,14 +863,6 @@
         "last_update": "2017-12-13"
       },
       {
-        "nct": "NCT02295748",
-        "title": "An Open-Label, Long-Term Extension Study to Evaluate the Safety and Tolerability Deflazacort",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2017-08-24",
-        "last_update": "2017-12-08"
-      },
-      {
         "nct": "NCT02404480",
         "title": "PTC596 in Patients With Advanced Solid Tumors",
         "phase": "PHASE1",
@@ -871,12 +871,12 @@
         "last_update": "2017-12-08"
       },
       {
-        "nct": "NCT02286635",
-        "title": "Evaluate Effects of Multiple Doses of Rifampin and Clarithromycin on the Single Dose Pharmacokinetics of Deflazacort",
+        "nct": "NCT02295748",
+        "title": "An Open-Label, Long-Term Extension Study to Evaluate the Safety and Tolerability Deflazacort",
         "phase": "PHASE1",
         "status": "COMPLETED",
-        "primary_completion": "2014-12",
-        "last_update": "2017-08-18"
+        "primary_completion": "2017-08-24",
+        "last_update": "2017-12-08"
       },
       {
         "nct": "NCT02286609",
@@ -884,22 +884,6 @@
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2015-02",
-        "last_update": "2017-08-18"
-      },
-      {
-        "nct": "NCT02286622",
-        "title": "A Single Dose Evaluation of the Effects of Renal Impairment on Deflazacort Pharmacokinetics",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2015-02",
-        "last_update": "2017-08-18"
-      },
-      {
-        "nct": "NCT02251600",
-        "title": "A Pharmacokinetic Study of Oral Deflazacort in Children and Adolescent Subjects With Duchenne Muscular Dystrophy",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2015-10",
         "last_update": "2017-08-18"
       },
       {
@@ -911,23 +895,103 @@
         "last_update": "2017-08-18"
       },
       {
+        "nct": "NCT02251600",
+        "title": "A Pharmacokinetic Study of Oral Deflazacort in Children and Adolescent Subjects With Duchenne Muscular Dystrophy",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2015-10",
+        "last_update": "2017-08-18"
+      },
+      {
+        "nct": "NCT02286622",
+        "title": "A Single Dose Evaluation of the Effects of Renal Impairment on Deflazacort Pharmacokinetics",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2015-02",
+        "last_update": "2017-08-18"
+      },
+      {
+        "nct": "NCT02286635",
+        "title": "Evaluate Effects of Multiple Doses of Rifampin and Clarithromycin on the Single Dose Pharmacokinetics of Deflazacort",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2014-12",
+        "last_update": "2017-08-18"
+      },
+      {
         "nct": "NCT01910168",
         "title": "A Study to Collect Blood Samples From Patients With Spinal Muscular Atrophy for Biomarker Analysis",
         "phase": "",
         "status": "COMPLETED",
         "primary_completion": "2014-02",
         "last_update": "2016-11-02"
-      },
-      {
-        "nct": "NCT00508586",
-        "title": "PTC299 and Hormonal Agent for Treatment of Metastatic Breast Cancer",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2012-03",
-        "last_update": "2016-03-03"
       }
     ],
     "ARGX": [
+      {
+        "nct": "NCT07091630",
+        "title": "A Study to Assess the Efficacy and Safety of Empasiprubart in Adults With CIDP",
+        "phase": "PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2027-10-07",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT07294170",
+        "title": "ADAPT Forward - Master Protocol of a Platform Study to Evaluate the Safety and Efficacy of Multiple Regimens in Participants With Myasthenia Gravis",
+        "phase": "",
+        "status": "RECRUITING",
+        "primary_completion": "2028-03-07",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT07673627",
+        "title": "ADAPT Forward 2 - ISA2 - a Study to Evaluate the Safety, Tolerability and Efficacy of Empasiprubart IV Monotherapy in Participants With AChR-Ab Seropositive Generalized Myasthenia Gravis",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2027-10",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT07596849",
+        "title": "A Study to Assess Efficacy and Safety of Efgartigimod PH20 SC PFS in Adult Participants With Graves' Disease.",
+        "phase": "PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2028-06",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT07284420",
+        "title": "ADAPT Forward 1 - ISA1 - a Study to Evaluate Empasiprubart IV as add-on Therapy to Efgartigimod IV in Participants With AChR-Ab Seropositive Generalized Myasthenia Gravis With a Partial Clinical Response to Efgartigimod",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2028-03-07",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT06655155",
+        "title": "A Study to Assess the Efficacy and Safety of Efgartigimod PH20 SC in Adults With Systemic Sclerosis",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2027-02",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT07287982",
+        "title": "A Study to Assess the Safety, Tolerability, Efficacy, Pharmacokinetics, and Immunogenicity of Intravenous Administration of ARGX-119 in Pediatric Participants Aged 5 to Less Than 18 Years With Spinal Muscular Atrophy",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2029-05-28",
+        "last_update": "2026-08-19"
+      },
+      {
+        "nct": "NCT07773727",
+        "title": "A Study to Evaluate the Effect of ARGX-121 on the Change in Proteinuria in Adult Participants With IgAN",
+        "phase": "PHASE2",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2029-10-29",
+        "last_update": "2026-08-19"
+      },
       {
         "nct": "NCT07610564",
         "title": "A Study to Assess the Effect of Empasiprubart on Nerve Morphology by Ultrasound in Adults With Multifocal Motor Neuropathy",
@@ -935,6 +999,14 @@
         "status": "RECRUITING",
         "primary_completion": "2028-02-01",
         "last_update": "2026-08-13"
+      },
+      {
+        "nct": "NCT07194850",
+        "title": "A Study of Efgartigimod IV in Participants From 12 Years to Less Than 18 Years of Age With Chronic Immune Thrombocytopenia (ITP)",
+        "phase": "PHASE2,PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2028-10",
+        "last_update": "2026-08-12"
       },
       {
         "nct": "NCT07760818",
@@ -953,22 +1025,6 @@
         "last_update": "2026-08-12"
       },
       {
-        "nct": "NCT07194850",
-        "title": "A Study of Efgartigimod IV in Participants From 12 Years to Less Than 18 Years of Age With Chronic Immune Thrombocytopenia (ITP)",
-        "phase": "PHASE2,PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2028-10",
-        "last_update": "2026-08-12"
-      },
-      {
-        "nct": "NCT07583641",
-        "title": "A Study to Learn About How Well the Medicine Efgartigimod Works to Treat Autoimmune Encephalitis In Children 12 Years or Older and Adults",
-        "phase": "PHASE2",
-        "status": "NOT_YET_RECRUITING",
-        "primary_completion": "2029-01-20",
-        "last_update": "2026-08-10"
-      },
-      {
         "nct": "NCT06298552",
         "title": "A Phase 3 Study to Evaluate the Efficacy and Safety of Efgartigimod IV in Patients With Acetylcholine Receptor Binding Antibody Seronegative Generalized Myasthenia Gravis",
         "phase": "PHASE3",
@@ -977,11 +1033,11 @@
         "last_update": "2026-08-10"
       },
       {
-        "nct": "NCT07287982",
-        "title": "A Study to Assess the Safety, Tolerability, Efficacy, Pharmacokinetics, and Immunogenicity of Intravenous Administration of ARGX-119 in Pediatric Participants Aged 5 to Less Than 18 Years With Spinal Muscular Atrophy",
+        "nct": "NCT07583641",
+        "title": "A Study to Learn About How Well the Medicine Efgartigimod Works to Treat Autoimmune Encephalitis In Children 12 Years or Older and Adults",
         "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2029-05-28",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2029-01-20",
         "last_update": "2026-08-10"
       },
       {
@@ -993,35 +1049,11 @@
         "last_update": "2026-08-04"
       },
       {
-        "nct": "NCT07294170",
-        "title": "ADAPT Forward - Master Protocol of a Platform Study to Evaluate the Safety and Efficacy of Multiple Regimens in Participants With Myasthenia Gravis",
-        "phase": "",
-        "status": "RECRUITING",
-        "primary_completion": "2028-03-07",
-        "last_update": "2026-07-30"
-      },
-      {
-        "nct": "NCT07284420",
-        "title": "ADAPT Forward 1 - ISA1 - a Study to Evaluate Empasiprubart IV as add-on Therapy to Efgartigimod IV in Participants With AChR-Ab Seropositive Generalized Myasthenia Gravis With a Partial Clinical Response to Efgartigimod",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2028-03-07",
-        "last_update": "2026-07-30"
-      },
-      {
         "nct": "NCT05523167",
         "title": "A Study to Investigate the Efficacy and Safety of Efgartigimod PH20 SC in Adult Participants With Active Idiopathic Inflammatory Myopathy.",
         "phase": "PHASE2,PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2026-07-02",
-        "last_update": "2026-07-24"
-      },
-      {
-        "nct": "NCT07673627",
-        "title": "ADAPT Forward 2 - ISA2 - a Study to Evaluate the Safety, Tolerability and Efficacy of Empasiprubart IV Monotherapy in Participants With AChR-Ab Seropositive Generalized Myasthenia Gravis",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2027-10",
         "last_update": "2026-07-24"
       },
       {
@@ -1033,14 +1065,6 @@
         "last_update": "2026-07-24"
       },
       {
-        "nct": "NCT07091630",
-        "title": "A Study to Assess the Efficacy and Safety of Empasiprubart in Adults With CIDP",
-        "phase": "PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2027-10-07",
-        "last_update": "2026-07-22"
-      },
-      {
         "nct": "NCT06078553",
         "title": "A Natural History Study in Participants With Congenital Myasthenic Syndromes (CMS) Due to Mutations in DOK7, MUSK, AGRN, or LRP4",
         "phase": "",
@@ -1049,11 +1073,11 @@
         "last_update": "2026-07-22"
       },
       {
-        "nct": "NCT06655155",
-        "title": "A Study to Assess the Efficacy and Safety of Efgartigimod PH20 SC in Adults With Systemic Sclerosis",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2027-02",
+        "nct": "NCT05979441",
+        "title": "A Study to Assess the Long-term Safety and Efficacy of a Subcutaneous Formulation of Efgartigimod in Adults With Active Idiopathic Inflammatory Myopathy",
+        "phase": "PHASE3",
+        "status": "ENROLLING_BY_INVITATION",
+        "primary_completion": "2028-09",
         "last_update": "2026-07-21"
       },
       {
@@ -1065,20 +1089,12 @@
         "last_update": "2026-07-21"
       },
       {
-        "nct": "NCT05979441",
-        "title": "A Study to Assess the Long-term Safety and Efficacy of a Subcutaneous Formulation of Efgartigimod in Adults With Active Idiopathic Inflammatory Myopathy",
-        "phase": "PHASE3",
-        "status": "ENROLLING_BY_INVITATION",
-        "primary_completion": "2028-09",
-        "last_update": "2026-07-21"
-      },
-      {
-        "nct": "NCT07596849",
-        "title": "A Study to Assess Efficacy and Safety of Efgartigimod PH20 SC PFS in Adult Participants With Graves' Disease.",
-        "phase": "PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2028-06",
-        "last_update": "2026-07-08"
+        "nct": "NCT06503731",
+        "title": "A Study to Evaluate the Safety and Tolerability of Efgartigimod PH20 SC Given by Prefilled Syringe in Kidney Transplant Recipients With Antibody-Mediated Rejection (AMR)",
+        "phase": "PHASE2",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2027-11",
+        "last_update": "2026-07-02"
       },
       {
         "nct": "NCT06558279",
@@ -1086,14 +1102,6 @@
         "phase": "PHASE3",
         "status": "ACTIVE_NOT_RECRUITING",
         "primary_completion": "2026-01-12",
-        "last_update": "2026-07-02"
-      },
-      {
-        "nct": "NCT06503731",
-        "title": "A Study to Evaluate the Safety and Tolerability of Efgartigimod PH20 SC Given by Prefilled Syringe in Kidney Transplant Recipients With Antibody-Mediated Rejection (AMR)",
-        "phase": "PHASE2",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2027-11",
         "last_update": "2026-07-02"
       },
       {
@@ -1201,19 +1209,19 @@
         "last_update": "2026-04-23"
       },
       {
-        "nct": "NCT06968338",
-        "title": "A Study to Assess the Safety of ARGX-213 in Healthy Volunteers",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2026-03-20",
-        "last_update": "2026-04-23"
-      },
-      {
         "nct": "NCT05374590",
         "title": "Evaluating Long-term Safety of Efgartigimod Administered Intravenously and Efgartigimod PH20 Administered Subcutaneously in Children With Generalized Myasthenia Gravis",
         "phase": "PHASE2,PHASE3",
         "status": "ENROLLING_BY_INVITATION",
         "primary_completion": "2029-09",
+        "last_update": "2026-04-23"
+      },
+      {
+        "nct": "NCT06968338",
+        "title": "A Study to Assess the Safety of ARGX-213 in Healthy Volunteers",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2026-03-20",
         "last_update": "2026-04-23"
       },
       {
@@ -1319,14 +1327,6 @@
         "status": "COMPLETED",
         "primary_completion": "2024-12-31",
         "last_update": "2026-01-22"
-      },
-      {
-        "nct": "NCT04812925",
-        "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of Efgartigimod PH20 Subcutaneous in Adult Patients With Primary Immune Thrombocytopenia",
-        "phase": "PHASE3",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2026-10-01",
-        "last_update": "2026-01-12"
       }
     ],
     "PTGX": [
@@ -1347,19 +1347,19 @@
         "last_update": "2025-08-20"
       },
       {
-        "nct": "NCT05210790",
-        "title": "A Phase 3 Study of Rusfertide in Patients With Polycythemia Vera",
-        "phase": "PHASE3",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2025-02-21",
-        "last_update": "2025-08-07"
-      },
-      {
         "nct": "NCT04057040",
         "title": "Hepcidin Mimetic in Patients With Polycythemia Vera (REVIVE)",
         "phase": "PHASE2",
         "status": "COMPLETED",
         "primary_completion": "2023-02-14",
+        "last_update": "2025-08-07"
+      },
+      {
+        "nct": "NCT05210790",
+        "title": "A Phase 3 Study of Rusfertide in Patients With Polycythemia Vera",
+        "phase": "PHASE3",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2025-02-21",
         "last_update": "2025-08-07"
       },
       {
@@ -1469,19 +1469,19 @@
         "last_update": "2026-03-25"
       },
       {
-        "nct": "NCT05907304",
-        "title": "A Study to Assess Naporafenib (ERAS-254) Administered With Trametinib in Patients With RAS Q61X Mutations",
-        "phase": "PHASE1",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2025-07-01",
-        "last_update": "2026-02-27"
-      },
-      {
         "nct": "NCT06346067",
         "title": "A Study to Assess Naporafenib (ERAS-254) Administered With Trametinib in Patients With NRAS-mutant Melanoma (SEACRAFT-2)",
         "phase": "PHASE3",
         "status": "ACTIVE_NOT_RECRUITING",
         "primary_completion": "2028-04",
+        "last_update": "2026-02-27"
+      },
+      {
+        "nct": "NCT05907304",
+        "title": "A Study to Assess Naporafenib (ERAS-254) Administered With Trametinib in Patients With RAS Q61X Mutations",
+        "phase": "PHASE1",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2025-07-01",
         "last_update": "2026-02-27"
       },
       {
@@ -1695,23 +1695,31 @@
         "last_update": "2020-12-22"
       },
       {
-        "nct": "NCT02503332",
-        "title": "Study of Pegcetacoplan (APL-2) Therapy in Patients With Geographic Atrophy",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2017-07-14",
-        "last_update": "2020-10-06"
-      },
-      {
         "nct": "NCT02461771",
         "title": "Assessment of Safety, Tolerability and Pharmacokinetics of Intravitreal Pegcetacoplan (APL-2) for Patients With Wet AMD",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2016-03-08",
         "last_update": "2020-10-06"
+      },
+      {
+        "nct": "NCT02503332",
+        "title": "Study of Pegcetacoplan (APL-2) Therapy in Patients With Geographic Atrophy",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2017-07-14",
+        "last_update": "2020-10-06"
       }
     ],
     "IMVT": [
+      {
+        "nct": "NCT07032662",
+        "title": "Imeroprubart in Adult Participants With Chronic Inflammatory Demyelinating Polyneuropathy (CIDP)",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2028-08",
+        "last_update": "2026-08-21"
+      },
       {
         "nct": "NCT05907668",
         "title": "A Proof-of-Concept Study to Assess Batoclimab in Participants With Graves' Disease",
@@ -1719,14 +1727,6 @@
         "status": "COMPLETED",
         "primary_completion": "2025-07-25",
         "last_update": "2026-08-13"
-      },
-      {
-        "nct": "NCT07018323",
-        "title": "A Study to Assess the Efficacy, Safety, and Tolerability of IMVT-1402 as Treatment for Adult Participants With Graves' Disease",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2027-05",
-        "last_update": "2026-08-12"
       },
       {
         "nct": "NCT06979531",
@@ -1737,20 +1737,20 @@
         "last_update": "2026-08-12"
       },
       {
+        "nct": "NCT07018323",
+        "title": "A Study to Assess the Efficacy, Safety, and Tolerability of IMVT-1402 as Treatment for Adult Participants With Graves' Disease",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2027-05",
+        "last_update": "2026-08-12"
+      },
+      {
         "nct": "NCT06727604",
         "title": "A Study to Assess the Efficacy, Safety, and Tolerability of IMVT-1402 as Treatment for Adult Participants With Graves' Disease",
         "phase": "PHASE2",
         "status": "RECRUITING",
         "primary_completion": "2028-06",
         "last_update": "2026-08-11"
-      },
-      {
-        "nct": "NCT07032662",
-        "title": "Imeroprubart in Adult Participants With Chronic Inflammatory Demyelinating Polyneuropathy (CIDP)",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2028-08",
-        "last_update": "2026-07-30"
       },
       {
         "nct": "NCT07039916",
@@ -1827,20 +1827,28 @@
     ],
     "CYTK": [
       {
+        "nct": "NCT06736574",
+        "title": "Study With Omecamtiv Mecarbil (CK-1827452) to Treat Chronic Heart Failure With Severely Reduced Ejection Fraction",
+        "phase": "PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2027-09",
+        "last_update": "2026-08-18"
+      },
+      {
+        "nct": "NCT06412666",
+        "title": "A Study to Evaluate the Effect of Aficamten in Pediatric Patients With Symptomatic Obstructive Hypertrophic Cardiomyopathy (oHCM).",
+        "phase": "PHASE2,PHASE3",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2030-01",
+        "last_update": "2026-08-18"
+      },
+      {
         "nct": "NCT06081894",
         "title": "A Trial to Evaluate the Efficacy and Safety of Aficamten Compared to Placebo in Adults With Symptomatic Non-Obstructive Hypertrophic Cardiomyopathy (nHCM)",
         "phase": "PHASE3",
         "status": "ACTIVE_NOT_RECRUITING",
         "primary_completion": "2026-08",
         "last_update": "2026-08-05"
-      },
-      {
-        "nct": "NCT06736574",
-        "title": "Study With Omecamtiv Mecarbil (CK-1827452) to Treat Chronic Heart Failure With Severely Reduced Ejection Fraction",
-        "phase": "PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2027-09",
-        "last_update": "2026-07-29"
       },
       {
         "nct": "NCT05767346",
@@ -1865,14 +1873,6 @@
         "status": "RECRUITING",
         "primary_completion": "2026-12-31",
         "last_update": "2026-05-20"
-      },
-      {
-        "nct": "NCT06412666",
-        "title": "A Study to Evaluate the Effect of Aficamten in Pediatric Patients With Symptomatic Obstructive Hypertrophic Cardiomyopathy (oHCM).",
-        "phase": "PHASE2,PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2030-01",
-        "last_update": "2026-04-13"
       },
       {
         "nct": "NCT07054073",
@@ -1923,19 +1923,19 @@
         "last_update": "2025-03-30"
       },
       {
-        "nct": "NCT04783766",
-        "title": "Safety, Tolerability and Pharmacokinetics Study of CK-3773274",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2021-08-05",
-        "last_update": "2025-01-24"
-      },
-      {
         "nct": "NCT03767855",
         "title": "A Single and Multiple Ascending Dose Study of CK-3773274 in Healthy Adult Subjects",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2020-01-03",
+        "last_update": "2025-01-24"
+      },
+      {
+        "nct": "NCT04783766",
+        "title": "Safety, Tolerability and Pharmacokinetics Study of CK-3773274",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2021-08-05",
         "last_update": "2025-01-24"
       },
       {
@@ -1987,19 +1987,19 @@
         "last_update": "2021-07-30"
       },
       {
-        "nct": "NCT01300013",
-        "title": "Study to Evaluate the Safety and Efficacy of IV Infusion Treatment With Omecamtiv Mecarbil in Subjects With Left Ventricular Systolic Dysfunction Hospitalized for Acute Heart Failure (ATOMIC-AHF)",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2013-04",
-        "last_update": "2021-07-27"
-      },
-      {
         "nct": "NCT02695420",
         "title": "Safety, PK, and Efficacy of Omecamtiv Mecarbil in Japanese Subjects With Heart Failure With Reduced Ejection Fraction",
         "phase": "PHASE2",
         "status": "COMPLETED",
         "primary_completion": "2017-04-06",
+        "last_update": "2021-07-27"
+      },
+      {
+        "nct": "NCT01300013",
+        "title": "Study to Evaluate the Safety and Efficacy of IV Infusion Treatment With Omecamtiv Mecarbil in Subjects With Left Ventricular Systolic Dysfunction Hospitalized for Acute Heart Failure (ATOMIC-AHF)",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2013-04",
         "last_update": "2021-07-27"
       },
       {
@@ -2125,6 +2125,14 @@
     ],
     "UTHR": [
       {
+        "nct": "NCT07261241",
+        "title": "NANT 2021-02: Randomized MIBG With Vorinostat/Dinutuximab/Vorinostat + Dinutuximab",
+        "phase": "PHASE2",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2030-12-31",
+        "last_update": "2026-08-21"
+      },
+      {
         "nct": "NCT05231122",
         "title": "Pembrolizumab Combined With Bevacizumab With or Without Agonist Anti-CD40 CDX-1140 for the Treatment of Patients With Recurrent Ovarian Cancer",
         "phase": "PHASE2",
@@ -2213,19 +2221,19 @@
         "last_update": "2026-06-03"
       },
       {
-        "nct": "NCT07612488",
-        "title": "A Study of CS231295 in Patients With Advanced Solid Tumors",
-        "phase": "PHASE1",
-        "status": "NOT_YET_RECRUITING",
-        "primary_completion": "2027-12",
-        "last_update": "2026-05-28"
-      },
-      {
         "nct": "NCT05776225",
         "title": "Pulmonary Hypertension Screening in Patients With Interstitial Lung Disease for Earlier Detection",
         "phase": "",
         "status": "COMPLETED",
         "primary_completion": "2026-03-13",
+        "last_update": "2026-05-28"
+      },
+      {
+        "nct": "NCT07612488",
+        "title": "A Study of CS231295 in Patients With Advanced Solid Tumors",
+        "phase": "PHASE1",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2027-12",
         "last_update": "2026-05-28"
       },
       {
@@ -2397,14 +2405,6 @@
         "last_update": "2025-12-09"
       },
       {
-        "nct": "NCT07261241",
-        "title": "NANT 2021-02: Randomized MIBG With Vorinostat/Dinutuximab/Vorinostat + Dinutuximab",
-        "phase": "PHASE2",
-        "status": "NOT_YET_RECRUITING",
-        "primary_completion": "2030-07-31",
-        "last_update": "2025-12-03"
-      },
-      {
         "nct": "NCT05564637",
         "title": "A Study of Treprostinil to Treat Interstitial Lung Disease Pulmonary Hypertension",
         "phase": "PHASE2",
@@ -2527,20 +2527,20 @@
     ],
     "ASND": [
       {
+        "nct": "NCT07221851",
+        "title": "Trial Investigating the Efficacy and Safety of Weekly Lonapegsomatropin Compared to Daily Somatropin in Children and Adolescents With Short Stature or Growth Failure Due to Growth Hormone Sufficient Disorders",
+        "phase": "PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2028-02",
+        "last_update": "2026-08-19"
+      },
+      {
         "nct": "NCT05929807",
         "title": "A Clinical Trial to Investigate Long-term Safety, Tolerability, and Efficacy of Weekly Subcutaneous Doses With TransCon CNP in Children and Adolescents With Achondroplasia",
         "phase": "PHASE2,PHASE3",
         "status": "ENROLLING_BY_INVITATION",
         "primary_completion": "2039-01",
         "last_update": "2026-08-17"
-      },
-      {
-        "nct": "NCT07221851",
-        "title": "Trial Investigating the Efficacy and Safety of Weekly Lonapegsomatropin Compared to Daily Somatropin in Children and Adolescents With Short Stature or Growth Failure Due to Growth Hormone Sufficient Disorders",
-        "phase": "PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2028-02",
-        "last_update": "2026-08-11"
       },
       {
         "nct": "NCT07264634",
@@ -2575,6 +2575,14 @@
         "last_update": "2026-07-14"
       },
       {
+        "nct": "NCT01247675",
+        "title": "A Safety, Pharmacokinetic and Pharmacodynamic Study of ACP-001 (TransCon hGH) in Adults With Growth Hormone Deficiency",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2011-05",
+        "last_update": "2026-07-08"
+      },
+      {
         "nct": "NCT01947907",
         "title": "Safety, PK/PD (Pharmacokinetics/Pharmacodynamics) and Efficacy of ACP-001 Weekly Versus Daily hGH in Children With Growth Hormone Deficiency (GHD)",
         "phase": "PHASE2",
@@ -2583,12 +2591,36 @@
         "last_update": "2026-07-08"
       },
       {
-        "nct": "NCT01247675",
-        "title": "A Safety, Pharmacokinetic and Pharmacodynamic Study of ACP-001 (TransCon hGH) in Adults With Growth Hormone Deficiency",
-        "phase": "PHASE2",
+        "nct": "NCT03305016",
+        "title": "A Safety, Tolerability and Efficacy Study of TransCon hGH in Children With Growth Hormone Deficiency",
+        "phase": "PHASE3",
         "status": "COMPLETED",
-        "primary_completion": "2011-05",
-        "last_update": "2026-07-08"
+        "primary_completion": "2019-03-19",
+        "last_update": "2026-07-07"
+      },
+      {
+        "nct": "NCT04701203",
+        "title": "A Trial Investigating the Safety, Tolerability and Efficacy of TransCon PTH Administered Daily in Adults With Hypoparathyroidism",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2022-01-12",
+        "last_update": "2026-07-07"
+      },
+      {
+        "nct": "NCT04615273",
+        "title": "A Trial to Compare the Efficacy and Safety of Once-weekly Lonapegsomatropin With Placebo and a Daily Somatropin Product in Adults With Growth Hormone Deficiency",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2023-11-02",
+        "last_update": "2026-07-07"
+      },
+      {
+        "nct": "NCT05171855",
+        "title": "A Trial to Investigate Long Term Efficacy and Safety of Lonapegsomatropin in Adults With Growth Hormone Deficiency",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2024-12-23",
+        "last_update": "2026-07-07"
       },
       {
         "nct": "NCT02781727",
@@ -2604,38 +2636,6 @@
         "phase": "PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2023-02-21",
-        "last_update": "2026-07-07"
-      },
-      {
-        "nct": "NCT05171855",
-        "title": "A Trial to Investigate Long Term Efficacy and Safety of Lonapegsomatropin in Adults With Growth Hormone Deficiency",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2024-12-23",
-        "last_update": "2026-07-07"
-      },
-      {
-        "nct": "NCT03305016",
-        "title": "A Safety, Tolerability and Efficacy Study of TransCon hGH in Children With Growth Hormone Deficiency",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2019-03-19",
-        "last_update": "2026-07-07"
-      },
-      {
-        "nct": "NCT04615273",
-        "title": "A Trial to Compare the Efficacy and Safety of Once-weekly Lonapegsomatropin With Placebo and a Daily Somatropin Product in Adults With Growth Hormone Deficiency",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2023-11-02",
-        "last_update": "2026-07-07"
-      },
-      {
-        "nct": "NCT04701203",
-        "title": "A Trial Investigating the Safety, Tolerability and Efficacy of TransCon PTH Administered Daily in Adults With Hypoparathyroidism",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2022-01-12",
         "last_update": "2026-07-07"
       },
       {
@@ -2663,19 +2663,19 @@
         "last_update": "2026-05-13"
       },
       {
-        "nct": "NCT06732895",
-        "title": "A Clinical Trial to Evaluate Efficacy and Safety of Navepegritide in Adolescents (12 - 18 Years of Age) With Achondroplasia.",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2027-08",
-        "last_update": "2026-04-21"
-      },
-      {
         "nct": "NCT05820672",
         "title": "A US Non-interventional, Effectiveness and Safety Study of Patients Treated With SKYTROFA",
         "phase": "",
         "status": "RECRUITING",
         "primary_completion": "2033-03",
+        "last_update": "2026-04-21"
+      },
+      {
+        "nct": "NCT06732895",
+        "title": "A Clinical Trial to Evaluate Efficacy and Safety of Navepegritide in Adolescents (12 - 18 Years of Age) With Achondroplasia.",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2027-08",
         "last_update": "2026-04-21"
       },
       {
@@ -2851,6 +2851,14 @@
     ],
     "AKRO": [
       {
+        "nct": "NCT06528314",
+        "title": "A Study Evaluating Efruxifermin in Subjects With Compensated Cirrhosis Due to NASH/MASH",
+        "phase": "PHASE3",
+        "status": "RECRUITING",
+        "primary_completion": "2030-02",
+        "last_update": "2026-08-19"
+      },
+      {
         "nct": "NCT06215716",
         "title": "A Study Evaluating Efruxifermin in Subjects With Non-Cirrhotic Nonalcoholic Steatohepatitis (NASH)/Metabolic Dysfunction-Associated Steatohepatitis (MASH) and Fibrosis",
         "phase": "PHASE3",
@@ -2865,14 +2873,6 @@
         "status": "COMPLETED",
         "primary_completion": "2023-12-15",
         "last_update": "2026-07-21"
-      },
-      {
-        "nct": "NCT06528314",
-        "title": "A Study Evaluating Efruxifermin in Subjects With Compensated Cirrhosis Due to NASH/MASH",
-        "phase": "PHASE3",
-        "status": "RECRUITING",
-        "primary_completion": "2030-02",
-        "last_update": "2026-07-16"
       },
       {
         "nct": "NCT06161571",
@@ -3031,19 +3031,19 @@
         "last_update": "2026-06-11"
       },
       {
-        "nct": "NCT06411379",
-        "title": "Study to Evaluate the Efficacy and Safety of Subcutaneous Sonelokimab Compared With Placebo in Adult Participants With Moderate to Severe Hidradenitis Suppurativa",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2025-08-14",
-        "last_update": "2026-06-08"
-      },
-      {
         "nct": "NCT07007637",
         "title": "A Study to Evaluate the Long-term Safety, Tolerability, and Efficacy of Subcutaneous Sonelokimab in Participants With Moderate to Severe Hidradenitis Suppurativa",
         "phase": "PHASE3",
         "status": "ENROLLING_BY_INVITATION",
         "primary_completion": "2028-06-13",
+        "last_update": "2026-06-08"
+      },
+      {
+        "nct": "NCT06411379",
+        "title": "Study to Evaluate the Efficacy and Safety of Subcutaneous Sonelokimab Compared With Placebo in Adult Participants With Moderate to Severe Hidradenitis Suppurativa",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2025-08-14",
         "last_update": "2026-06-08"
       },
       {
@@ -3257,14 +3257,6 @@
         "last_update": "2023-10-23"
       },
       {
-        "nct": "NCT00007020",
-        "title": "Compassionate Treatment of Patients With Inborn Errors of Bile Acid Metabolism With Cholic Acid",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2009-12",
-        "last_update": "2023-10-03"
-      },
-      {
         "nct": "NCT01115582",
         "title": "Efficacy of To Be Marketed (TBM) Cholic Acid Capsules Used to Treat Children With Inborn Errors of Bile Acid Synthesis",
         "phase": "PHASE3",
@@ -3278,6 +3270,14 @@
         "phase": "PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2016-07",
+        "last_update": "2023-10-03"
+      },
+      {
+        "nct": "NCT00007020",
+        "title": "Compassionate Treatment of Patients With Inborn Errors of Bile Acid Metabolism With Cholic Acid",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2009-12",
         "last_update": "2023-10-03"
       },
       {
@@ -3345,19 +3345,19 @@
         "last_update": "2019-03-27"
       },
       {
-        "nct": "NCT02057692",
-        "title": "Evaluation of LUM001 in the Reduction of Pruritus in Alagille Syndrome",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2016-11-16",
-        "last_update": "2019-03-26"
-      },
-      {
         "nct": "NCT02287779",
         "title": "Safety and Tolerability Study of SHP626 in Overweight and Obese Adults",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2015-06-19",
+        "last_update": "2019-03-26"
+      },
+      {
+        "nct": "NCT02057692",
+        "title": "Evaluation of LUM001 in the Reduction of Pruritus in Alagille Syndrome",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2016-11-16",
         "last_update": "2019-03-26"
       },
       {
@@ -3475,19 +3475,19 @@
         "last_update": "2024-09-19"
       },
       {
-        "nct": "NCT06250205",
-        "title": "Evaluate the Pharmacokinetics of a Combined Oral Contraceptive (COC) With and Without Obicetrapib",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2024-04-25",
-        "last_update": "2024-09-19"
-      },
-      {
         "nct": "NCT05972278",
         "title": "Investigating the Effect of Obicetrapib on Lipoprotein Metabolism",
         "phase": "PHASE1",
         "status": "ACTIVE_NOT_RECRUITING",
         "primary_completion": "2024-09-26",
+        "last_update": "2024-09-19"
+      },
+      {
+        "nct": "NCT06250205",
+        "title": "Evaluate the Pharmacokinetics of a Combined Oral Contraceptive (COC) With and Without Obicetrapib",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2024-04-25",
         "last_update": "2024-09-19"
       },
       {
@@ -3533,6 +3533,14 @@
     ],
     "BBIO": [
       {
+        "nct": "NCT07398950",
+        "title": "Prospective Evaluation of Artificial Intelligence-enabled Screening for Transthyretin Amyloid Cardiomyopathy (ATTR-CM)",
+        "phase": "",
+        "status": "ENROLLING_BY_INVITATION",
+        "primary_completion": "2027-06",
+        "last_update": "2026-08-18"
+      },
+      {
         "nct": "NCT07116473",
         "title": "To Evaluate the Long-term Safety and Tolerability of Acoramidis in Participants With Newly Diagnosed ATTR-CM (ACT-EARLY OLE)",
         "phase": "PHASE3",
@@ -3573,12 +3581,12 @@
         "last_update": "2026-07-29"
       },
       {
-        "nct": "NCT07398950",
-        "title": "Prospective Evaluation of Artificial Intelligence-enabled Screening for Transthyretin Amyloid Cardiomyopathy (ATTR-CM)",
+        "nct": "NCT06410976",
+        "title": "Prospective Clinical Assessment Study in Children With Hypochondroplasia",
         "phase": "",
         "status": "RECRUITING",
-        "primary_completion": "2027-06",
-        "last_update": "2026-07-28"
+        "primary_completion": "2026-10",
+        "last_update": "2026-07-16"
       },
       {
         "nct": "NCT06873035",
@@ -3586,14 +3594,6 @@
         "phase": "PHASE2,PHASE3",
         "status": "ENROLLING_BY_INVITATION",
         "primary_completion": "2027-01",
-        "last_update": "2026-07-16"
-      },
-      {
-        "nct": "NCT06410976",
-        "title": "Prospective Clinical Assessment Study in Children With Hypochondroplasia",
-        "phase": "",
-        "status": "RECRUITING",
-        "primary_completion": "2026-10",
         "last_update": "2026-07-16"
       },
       {
@@ -3741,19 +3741,19 @@
         "last_update": "2024-11-19"
       },
       {
-        "nct": "NCT03294707",
-        "title": "Single and Multiple Ascending Dose Study Assessing the Safety, Tolerability, PK and PD of AG10",
-        "phase": "PHASE1",
-        "status": "COMPLETED",
-        "primary_completion": "2018-02-05",
-        "last_update": "2024-09-19"
-      },
-      {
         "nct": "NCT04769479",
         "title": "A Single Dose Study to Evaluate the Pharmacokinetics of Acoramidis Modified Release Formulations in Healthy Subjects",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2021-08-04",
+        "last_update": "2024-09-19"
+      },
+      {
+        "nct": "NCT03294707",
+        "title": "Single and Multiple Ascending Dose Study Assessing the Safety, Tolerability, PK and PD of AG10",
+        "phase": "PHASE1",
+        "status": "COMPLETED",
+        "primary_completion": "2018-02-05",
         "last_update": "2024-09-19"
       },
       {
@@ -3791,6 +3791,14 @@
     ],
     "ARQT": [
       {
+        "nct": "NCT07683806",
+        "title": "Efficacy and Safety of Roflumilast Foam 0.3% in Trial Participants With Seborrheic Dermatitis",
+        "phase": "PHASE3",
+        "status": "NOT_YET_RECRUITING",
+        "primary_completion": "2027-06-30",
+        "last_update": "2026-08-21"
+      },
+      {
         "nct": "NCT07453602",
         "title": "Ph 1a/1b Single Ascending Dose and Multiple Ascending Dose Study of ARQ-234",
         "phase": "PHASE1",
@@ -3815,14 +3823,6 @@
         "last_update": "2026-08-07"
       },
       {
-        "nct": "NCT07683806",
-        "title": "Efficacy and Safety of Roflumilast Foam 0.3% in Trial Participants With Seborrheic Dermatitis",
-        "phase": "PHASE3",
-        "status": "NOT_YET_RECRUITING",
-        "primary_completion": "2027-06-30",
-        "last_update": "2026-07-06"
-      },
-      {
         "nct": "NCT07340216",
         "title": "Maximal Usage Pharmacokinetics and Safety Study of ARQ-154 Foam 0.3% in Pediatric Participants With Scalp and Body Psoriasis",
         "phase": "PHASE1",
@@ -3831,11 +3831,11 @@
         "last_update": "2026-05-22"
       },
       {
-        "nct": "NCT04804605",
-        "title": "Open Label Extension Trial of PDE4 Inhibition With Roflumilast for the Management of Atopic Dermatitis",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2024-05-28",
+        "nct": "NCT07077902",
+        "title": "A Study for Evaluating Safety & Efficacy of Topical Roflumilast 0.3% Foam in Hidradenitis Suppurativa",
+        "phase": "PHASE2",
+        "status": "RECRUITING",
+        "primary_completion": "2026-09",
         "last_update": "2025-12-23"
       },
       {
@@ -3847,11 +3847,11 @@
         "last_update": "2025-12-23"
       },
       {
-        "nct": "NCT07077902",
-        "title": "A Study for Evaluating Safety & Efficacy of Topical Roflumilast 0.3% Foam in Hidradenitis Suppurativa",
-        "phase": "PHASE2",
-        "status": "RECRUITING",
-        "primary_completion": "2026-09",
+        "nct": "NCT04804605",
+        "title": "Open Label Extension Trial of PDE4 Inhibition With Roflumilast for the Management of Atopic Dermatitis",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2024-05-28",
         "last_update": "2025-12-23"
       },
       {
@@ -3959,19 +3959,19 @@
         "last_update": "2023-02-13"
       },
       {
-        "nct": "NCT04211363",
-        "title": "Trial of PDE4 Inhibition With Roflumilast for the Management of Plaque Psoriasis",
-        "phase": "PHASE3",
-        "status": "COMPLETED",
-        "primary_completion": "2020-11-16",
-        "last_update": "2022-12-07"
-      },
-      {
         "nct": "NCT04211389",
         "title": "Twin Trial of PDE4 Inhibition With Roflumilast for the Management of Plaque Psoriasis",
         "phase": "PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2020-11-23",
+        "last_update": "2022-12-07"
+      },
+      {
+        "nct": "NCT04211363",
+        "title": "Trial of PDE4 Inhibition With Roflumilast for the Management of Plaque Psoriasis",
+        "phase": "PHASE3",
+        "status": "COMPLETED",
+        "primary_completion": "2020-11-16",
         "last_update": "2022-12-07"
       },
       {
@@ -4049,19 +4049,19 @@
         "last_update": "2026-03-20"
       },
       {
-        "nct": "NCT06531941",
-        "title": "Extension Study to Evaluate the Long-Term Safety and Tolerability of MBX 2109 in Patients With Hypoparathyroidism",
-        "phase": "PHASE2",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2027-05-27",
-        "last_update": "2025-10-28"
-      },
-      {
         "nct": "NCT06496217",
         "title": "Safety and Pharmacokinetics Study of MBX 2109 in Adult Subjects With Normal and Impaired Renal Function",
         "phase": "PHASE1",
         "status": "COMPLETED",
         "primary_completion": "2025-09-04",
+        "last_update": "2025-10-28"
+      },
+      {
+        "nct": "NCT06531941",
+        "title": "Extension Study to Evaluate the Long-Term Safety and Tolerability of MBX 2109 in Patients With Hypoparathyroidism",
+        "phase": "PHASE2",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2027-05-27",
         "last_update": "2025-10-28"
       },
       {
@@ -4195,19 +4195,19 @@
         "last_update": "2021-03-23"
       },
       {
-        "nct": "NCT02870972",
-        "title": "Efficacy and Safety of BCX7353 to Prevent Angioedema Attacks in Subjects With Hereditary Angioedema",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2017-08",
-        "last_update": "2021-03-23"
-      },
-      {
         "nct": "NCT02369159",
         "title": "Safety, PK and Effectiveness of IV Peramivir Versus Oseltamivir in Pediatric Subjects With Uncomplicated Influenza",
         "phase": "PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2019-10-28",
+        "last_update": "2021-03-23"
+      },
+      {
+        "nct": "NCT02870972",
+        "title": "Efficacy and Safety of BCX7353 to Prevent Angioedema Attacks in Subjects With Hereditary Angioedema",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2017-08",
         "last_update": "2021-03-23"
       },
       {
@@ -4267,6 +4267,14 @@
         "last_update": "2015-02-16"
       },
       {
+        "nct": "NCT00419263",
+        "title": "Evaluation of the Efficacy and Safety of Peramivir in Subjects With Uncomplicated Acute Influenza.",
+        "phase": "PHASE2",
+        "status": "COMPLETED",
+        "primary_completion": "2007-09",
+        "last_update": "2015-02-12"
+      },
+      {
         "nct": "NCT00453999",
         "title": "Evaluation of Efficacy and Safety of Peramivir in Adults With Acute Serious or Potentially Life-threatening Influenza",
         "phase": "PHASE2",
@@ -4280,14 +4288,6 @@
         "phase": "PHASE3",
         "status": "COMPLETED",
         "primary_completion": "2010-10",
-        "last_update": "2015-02-12"
-      },
-      {
-        "nct": "NCT00419263",
-        "title": "Evaluation of the Efficacy and Safety of Peramivir in Subjects With Uncomplicated Acute Influenza.",
-        "phase": "PHASE2",
-        "status": "COMPLETED",
-        "primary_completion": "2007-09",
         "last_update": "2015-02-12"
       },
       {
@@ -4315,16 +4315,16 @@
         "last_update": "2014-08-15"
       },
       {
-        "nct": "NCT01265264",
-        "title": "Study to Evaluate sUA Lowering Activity, Safety and Efficacy of Oral Ulodesine Added to Allopurinol",
+        "nct": "NCT01407874",
+        "title": "A Randomized, Double-Blind, Dose-Response Study of the Safety and Uric Acid Effects of Oral Ulodesine Added to Allopurinol in Subjects With Gout and Concomitant Moderate Renal Insufficiency",
         "phase": "PHASE2",
         "status": "COMPLETED",
         "primary_completion": "2012-07",
         "last_update": "2013-11-20"
       },
       {
-        "nct": "NCT01407874",
-        "title": "A Randomized, Double-Blind, Dose-Response Study of the Safety and Uric Acid Effects of Oral Ulodesine Added to Allopurinol in Subjects With Gout and Concomitant Moderate Renal Insufficiency",
+        "nct": "NCT01265264",
+        "title": "Study to Evaluate sUA Lowering Activity, Safety and Efficacy of Oral Ulodesine Added to Allopurinol",
         "phase": "PHASE2",
         "status": "COMPLETED",
         "primary_completion": "2012-07",
@@ -4363,11 +4363,11 @@
         "last_update": "2012-02-08"
       },
       {
-        "nct": "NCT00640523",
-        "title": "Phase II Study of Forodesine in Subjects With Chronic Lymphocytic Leukemia (CLL)",
+        "nct": "NCT00501735",
+        "title": "Forodesine in the Treatment of Cutaneous T-Cell Lymphoma",
         "phase": "PHASE2",
         "status": "COMPLETED",
-        "primary_completion": "2010-11",
+        "primary_completion": "2010-07",
         "last_update": "2012-01-23"
       },
       {
@@ -4387,11 +4387,11 @@
         "last_update": "2012-01-23"
       },
       {
-        "nct": "NCT00501735",
-        "title": "Forodesine in the Treatment of Cutaneous T-Cell Lymphoma",
+        "nct": "NCT00640523",
+        "title": "Phase II Study of Forodesine in Subjects With Chronic Lymphocytic Leukemia (CLL)",
         "phase": "PHASE2",
         "status": "COMPLETED",
-        "primary_completion": "2010-07",
+        "primary_completion": "2010-11",
         "last_update": "2012-01-23"
       },
       {
@@ -4679,20 +4679,28 @@
     ],
     "IRON": [
       {
-        "nct": "NCT06910358",
-        "title": "Study of Bitopertin in Participants With EPP or XLP (APOLLO)",
-        "phase": "PHASE3",
-        "status": "ACTIVE_NOT_RECRUITING",
-        "primary_completion": "2026-09",
-        "last_update": "2026-08-12"
-      },
-      {
         "nct": "NCT05883748",
         "title": "HELIOS: Open-Label, Long-Term Extension Study to Investigate the Safety, Tolerability, and Efficacy of DISC-1459 (Bitopertin) in Participants With EPP or XLP",
         "phase": "PHASE2,PHASE3",
         "status": "ENROLLING_BY_INVITATION",
         "primary_completion": "2028-06",
-        "last_update": "2026-08-12"
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT06910358",
+        "title": "Study of Bitopertin in Participants With EPP or XLP (APOLLO)",
+        "phase": "PHASE3",
+        "status": "ACTIVE_NOT_RECRUITING",
+        "primary_completion": "2026-09",
+        "last_update": "2026-08-21"
+      },
+      {
+        "nct": "NCT07187973",
+        "title": "A Phase 1b, Open-Label Study of DISC-3405 in Participants With Sickle Cell Disease (SCD)",
+        "phase": "PHASE1",
+        "status": "RECRUITING",
+        "primary_completion": "2027-06",
+        "last_update": "2026-08-19"
       },
       {
         "nct": "NCT05320198",
@@ -4717,14 +4725,6 @@
         "status": "ACTIVE_NOT_RECRUITING",
         "primary_completion": "2027-02",
         "last_update": "2026-07-31"
-      },
-      {
-        "nct": "NCT07187973",
-        "title": "A Phase 1b, Open-Label Study of DISC-3405 in Participants With Sickle Cell Disease (SCD)",
-        "phase": "PHASE1",
-        "status": "RECRUITING",
-        "primary_completion": "2027-06",
-        "last_update": "2026-07-30"
       },
       {
         "nct": "NCT05745883",
