@@ -1,6 +1,6 @@
 {
   "_comment": "Top ~10 meaningful positions per fund from latest 13F (2026-Q1). pct = percent of 13F equity portfolio. pct_estimated=true means approximate (exact per-name weight not disclosed in the source snapshot / name is a confirmed holding but ranked weight pending); refresh_holdings.py overwrites the whole list with exact EDGAR values and true ranks 1-12 on each weekly run. rank is by position size.",
-  "as_of": "2026-08-24",
+  "as_of": "2026-08-31",
   "source": "SEC EDGAR 13F-HR (auto-refreshed)",
   "holdings": {
     "rtw": [
